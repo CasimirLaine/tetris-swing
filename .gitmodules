@@ -1,0 +1,4 @@
+[submodule "Tetris-Base"]
+	path = Tetris-Base
+	url = https://github.com/CasimirLaine/Tetris-Base.git
+	branch = master
