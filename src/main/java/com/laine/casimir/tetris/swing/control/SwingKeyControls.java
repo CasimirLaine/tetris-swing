@@ -7,7 +7,11 @@ import java.awt.event.KeyEvent;
 
 public class SwingKeyControls extends KeyAdapter {
 
-    private TetrisController tetrisController;
+    private final TetrisController tetrisController;
+
+    public SwingKeyControls(TetrisController tetrisController) {
+        this.tetrisController = tetrisController;
+    }
 
     @Override
     public final void keyPressed(KeyEvent e) {
