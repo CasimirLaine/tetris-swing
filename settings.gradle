@@ -1,2 +1,3 @@
 rootProject.name = 'Tetris Swing'
-
+include(':Tetris-Base')
+project(':Tetris-Base').projectDir = new File('Tetris-Base')
