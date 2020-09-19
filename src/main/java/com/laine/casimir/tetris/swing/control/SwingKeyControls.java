@@ -2,10 +2,10 @@ package com.laine.casimir.tetris.swing.control;
 
 import com.laine.casimir.tetris.base.control.TetrisController;
 
-import java.awt.event.KeyAdapter;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class SwingKeyControls extends KeyAdapter {
+public class SwingKeyControls implements KeyEventDispatcher {
 
     private final TetrisController tetrisController;
 
@@ -14,7 +14,10 @@ public class SwingKeyControls extends KeyAdapter {
     }
 
     @Override
-    public final void keyPressed(KeyEvent e) {
+    public boolean dispatchKeyEvent(KeyEvent e) {
+        if (e.getID() != KeyEvent.KEY_PRESSED) {
+            return false;
+        }
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
             case KeyEvent.VK_F1:
@@ -22,11 +25,11 @@ public class SwingKeyControls extends KeyAdapter {
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_NUMPAD4:
-                tetrisController.leftShift();
+                tetrisController.shiftLeft();
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_NUMPAD6:
-                tetrisController.rightShift();
+                tetrisController.shiftRight();
                 break;
             case KeyEvent.VK_UP:
             case KeyEvent.VK_X:
@@ -55,5 +58,6 @@ public class SwingKeyControls extends KeyAdapter {
                 tetrisController.hold();
                 break;
         }
+        return true;
     }
 }

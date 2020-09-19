@@ -2,11 +2,9 @@ package com.laine.casimir.tetris.swing.view;
 
 import java.awt.*;
 import java.util.Map;
-import java.util.Random;
 
 public final class GraphicUtils {
 
-    private static final Random RANDOM = new Random();
     private static final RenderingHints RENDERING_HINTS = new RenderingHints(Map.of(
             RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON,
             RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON,
@@ -24,9 +22,5 @@ public final class GraphicUtils {
 
     public static RenderingHints getGraphicsConfig() {
         return RENDERING_HINTS;
-    }
-
-    public static Color generateRandomColorRGB() {
-        return new Color(RANDOM.nextInt(256), RANDOM.nextInt(256), RANDOM.nextInt(256));
     }
 }

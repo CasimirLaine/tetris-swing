@@ -2,7 +2,7 @@ package com.laine.casimir.tetris.swing.view.component;
 
 import java.awt.*;
 
-public class JTetrisSquare extends AbstactTetrisComponent {
+class JTetrisSquare extends AbstactTetrisComponent {
 
     private static final int STROKE_WIDTH = 1;
 
@@ -10,7 +10,6 @@ public class JTetrisSquare extends AbstactTetrisComponent {
     private final Rectangle rectangle = new Rectangle(0, 0, getWidth(), getHeight());
 
     public JTetrisSquare() {
-        super();
         init();
     }
 

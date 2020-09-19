@@ -5,7 +5,7 @@ import com.laine.casimir.tetris.swing.view.GraphicUtils;
 import javax.swing.*;
 import java.awt.*;
 
-public class AbstactTetrisComponent extends JComponent {
+abstract class AbstactTetrisComponent extends JComponent {
 
     public AbstactTetrisComponent() {
         super();

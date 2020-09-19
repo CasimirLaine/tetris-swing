@@ -7,18 +7,16 @@ import java.awt.*;
 
 public class JTetromino extends AbstactTetrisComponent {
 
-    private final AbstractTetromino tetromino;
-
-    public JTetromino(AbstractTetromino tetromino) {
-        super();
-        if (tetromino == null) {
-            throw new IllegalStateException("tetromino can not be null!");
+    @Override
+    public void setBackground(Color bg) {
+        super.setBackground(bg);
+        for (Component component : getComponents()) {
+            component.setBackground(bg);
         }
-        this.tetromino = tetromino;
-        init(tetromino);
     }
 
-    private void init(AbstractTetromino tetromino) {
+    public void setTetromino(AbstractTetromino tetromino) {
+        removeAll();
         setBackground(Color.decode(tetromino.getColorHex()));
         final GridBagLayout layout = new GridBagLayout();
         setLayout(layout);
@@ -36,17 +34,5 @@ public class JTetromino extends AbstactTetrisComponent {
             add(square, constraints);
         }
         setFocusable(false);
-    }
-
-    @Override
-    public void setBackground(Color bg) {
-        super.setBackground(bg);
-        for (Component component : getComponents()) {
-            component.setBackground(bg);
-        }
-    }
-
-    public AbstractTetromino getTetromino() {
-        return tetromino;
     }
 }

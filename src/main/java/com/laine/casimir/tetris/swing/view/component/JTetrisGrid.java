@@ -11,12 +11,10 @@ public class JTetrisGrid extends AbstactTetrisComponent {
     private final Stroke stroke = new BasicStroke(LINE_WIDTH);
 
     public JTetrisGrid() {
-        super();
         init();
     }
 
     private void init() {
-        setFocusable(true);
     }
 
     @Override
