@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class SwingManager {
 
-    private final JTetrisFrame frame = new JTetrisFrame(SwingTetrisConstants.APP_NAME);
+    private final JFrame frame = new JTetrisFrame(SwingTetrisConstants.APP_NAME);
 
     public SwingManager() {
         init();
@@ -19,7 +19,7 @@ public class SwingManager {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(SwingTetrisConstants.WINDOW_DEFAULT_WIDTH, SwingTetrisConstants.WINDOW_DEFAULT_HEIGHT));
         frame.setMinimumSize(new Dimension(SwingTetrisConstants.WINDOW_MIN_WIDTH, SwingTetrisConstants.WINDOW_MIN_HEIGHT));
-        frame.setPanel(new JMainMenuPanel(frame));
+        frame.setContentPane(new JMainMenuPanel(frame));
         frame.pack();
         frame.setVisible(true);
     }

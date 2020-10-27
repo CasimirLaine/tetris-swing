@@ -1,6 +1,7 @@
 package com.laine.casimir.tetris.swing.view.component;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class JTetrisFrame extends JFrame {
 
@@ -8,8 +9,9 @@ public class JTetrisFrame extends JFrame {
         super(title);
     }
 
-    public void setPanel(JComponent jComponent) {
-        setContentPane(jComponent);
+    @Override
+    public void setContentPane(Container contentPane) {
+        super.setContentPane(contentPane);
         revalidate();
         repaint();
     }

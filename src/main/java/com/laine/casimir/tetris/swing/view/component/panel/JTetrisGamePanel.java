@@ -5,7 +5,6 @@ import com.laine.casimir.tetris.base.event.TetrisGameListener;
 import com.laine.casimir.tetris.base.model.Playfield;
 import com.laine.casimir.tetris.base.model.TetrisGame;
 import com.laine.casimir.tetris.swing.control.SwingKeyControls;
-import com.laine.casimir.tetris.swing.view.component.JTetrisFrame;
 import com.laine.casimir.tetris.swing.view.component.JTetrisGrid;
 import com.laine.casimir.tetris.swing.view.component.fragment.JHoldBoxFragment;
 import com.laine.casimir.tetris.swing.view.component.fragment.JNextTetrominoFragment;
@@ -16,18 +15,18 @@ import java.awt.*;
 
 class JTetrisGamePanel extends JPanel {
 
-    private final JTetrisFrame frame;
+    private final JFrame frame;
     private final JPauseMenuPanel pauseMenuPanel;
-
-    private final TetrisGame tetrisGame = new TetrisGame();
-    private final TetrisController tetrisController;
 
     private final JTetrisGrid tetrisGrid = new JTetrisGrid();
     private final TetrisGridLayout tetrisGridLayout = new TetrisGridLayout(Playfield.WIDTH, Playfield.VISIBLE_HEIGHT);
     private final JHoldBoxFragment holdBoxFragment = new JHoldBoxFragment();
     private final JNextTetrominoFragment nextTetrominoFragment = new JNextTetrominoFragment();
 
-    public JTetrisGamePanel(JTetrisFrame frame) {
+    private final TetrisGame tetrisGame = new TetrisGame();
+    private final TetrisController tetrisController;
+
+    public JTetrisGamePanel(JFrame frame) {
         this.frame = frame;
         this.pauseMenuPanel = new JPauseMenuPanel(frame, this);
         this.tetrisController = new TetrisController(tetrisGame);
@@ -52,9 +51,9 @@ class JTetrisGamePanel extends JPanel {
 
     private void setPausePanelVisible(boolean pausePanelVisible) {
         if (pausePanelVisible) {
-            frame.setPanel(pauseMenuPanel);
+            frame.setContentPane(pauseMenuPanel);
         } else {
-            frame.setPanel(this);
+            frame.setContentPane(this);
         }
     }
 
