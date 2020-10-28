@@ -17,6 +17,9 @@ public class JTetromino extends AbstactTetrisComponent {
 
     public void setTetromino(AbstractTetromino tetromino) {
         removeAll();
+        if (tetromino == null) {
+            return;
+        }
         setBackground(Color.decode(tetromino.getColorHex()));
         final GridBagLayout layout = new GridBagLayout();
         setLayout(layout);

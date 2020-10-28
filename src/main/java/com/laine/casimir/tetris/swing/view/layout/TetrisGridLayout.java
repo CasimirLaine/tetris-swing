@@ -51,17 +51,17 @@ public class TetrisGridLayout implements LayoutManager2 {
 
     @Override
     public Dimension preferredLayoutSize(Container parent) {
-        return parent.getPreferredSize();
+        return new Dimension();
     }
 
     @Override
     public Dimension minimumLayoutSize(Container parent) {
-        return parent.getMinimumSize();
+        return new Dimension();
     }
 
     @Override
     public Dimension maximumLayoutSize(Container target) {
-        return target.getMaximumSize();
+        return new Dimension();
     }
 
     @Override

@@ -7,7 +7,7 @@ import com.laine.casimir.tetris.swing.view.component.panel.JMainMenuPanel;
 import javax.swing.*;
 import java.awt.*;
 
-public class SwingManager {
+public final class SwingManager {
 
     private final JFrame frame = new JTetrisFrame(SwingTetrisConstants.APP_NAME);
 

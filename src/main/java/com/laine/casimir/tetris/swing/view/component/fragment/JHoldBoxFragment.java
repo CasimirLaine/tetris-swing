@@ -4,7 +4,6 @@ import com.laine.casimir.tetris.base.model.tetromino.AbstractTetromino;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTetromino;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class JHoldBoxFragment extends JFragment {

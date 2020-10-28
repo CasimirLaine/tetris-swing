@@ -4,11 +4,12 @@ import com.laine.casimir.tetris.base.model.tetromino.AbstractTetromino;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTetromino;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class JNextTetrominoFragment extends JFragment {
 
-    private final JTetromino nextTetrominoComponent = new JTetromino();
+    private final JPanel tetrominoPanel = new JPanel();
 
     public JNextTetrominoFragment() {
         init();
@@ -16,10 +17,17 @@ public class JNextTetrominoFragment extends JFragment {
 
     private void init() {
         setTitle(TetrisSwingStrings.TITLE_NEXT);
-        add(nextTetrominoComponent, BorderLayout.CENTER);
+        tetrominoPanel.setLayout(new BoxLayout(tetrominoPanel, BoxLayout.Y_AXIS));
+        add(tetrominoPanel, BorderLayout.CENTER);
     }
 
-    public void setNextTetrominoComponent(AbstractTetromino tetromino) {
-        nextTetrominoComponent.setTetromino(tetromino);
+    public void addTetromino(AbstractTetromino tetromino) {
+        final JTetromino jTetromino = new JTetromino();
+        jTetromino.setTetromino(tetromino);
+        tetrominoPanel.add(jTetromino);
+    }
+
+    public void clear() {
+        tetrominoPanel.removeAll();
     }
 }
