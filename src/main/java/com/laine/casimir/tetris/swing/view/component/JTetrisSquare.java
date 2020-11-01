@@ -2,7 +2,7 @@ package com.laine.casimir.tetris.swing.view.component;
 
 import java.awt.*;
 
-class JTetrisSquare extends AbstactTetrisComponent {
+public class JTetrisSquare extends AbstactTetrisComponent {
 
     private static final int STROKE_WIDTH = 1;
 
@@ -24,7 +24,6 @@ class JTetrisSquare extends AbstactTetrisComponent {
         rectangle.height = getHeight();
         g2d.setColor(getBackground());
         g2d.fill(rectangle);
-        g2d.setColor(Color.BLACK);
         g2d.setStroke(stroke);
         g2d.draw(rectangle);
     }

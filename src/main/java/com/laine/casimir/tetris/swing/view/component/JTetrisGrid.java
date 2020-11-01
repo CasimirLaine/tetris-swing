@@ -1,7 +1,5 @@
 package com.laine.casimir.tetris.swing.view.component;
 
-import com.laine.casimir.tetris.base.model.Playfield;
-
 import java.awt.*;
 
 public class JTetrisGrid extends AbstactTetrisComponent {
@@ -10,7 +8,12 @@ public class JTetrisGrid extends AbstactTetrisComponent {
 
     private final Stroke stroke = new BasicStroke(LINE_WIDTH);
 
-    public JTetrisGrid() {
+    private int colCount;
+    private int rowCount;
+
+    public JTetrisGrid(int colCount, int rowCount) {
+        this.colCount = colCount;
+        this.rowCount = rowCount;
         init();
     }
 
@@ -23,18 +26,34 @@ public class JTetrisGrid extends AbstactTetrisComponent {
         g2d.fillRect(0, 0, getWidth(), getHeight());
         g2d.setColor(getForeground());
         g2d.setStroke(stroke);
-        for (int xIndex = 0, x = 0; xIndex < Playfield.WIDTH; xIndex++, x += getGridWidth()) {
-            for (int yIndex = 0, y = 0; yIndex < Playfield.VISIBLE_HEIGHT; yIndex++, y += getGridHeight()) {
+        for (int xIndex = 0, x = 0; xIndex < colCount; xIndex++, x += getGridWidth()) {
+            for (int yIndex = 0, y = 0; yIndex < rowCount; yIndex++, y += getGridHeight()) {
                 g2d.drawRect(x, y, getGridWidth(), getGridHeight());
             }
         }
     }
 
     private int getGridWidth() {
-        return getWidth() / Playfield.WIDTH;
+        return getWidth() / colCount;
     }
 
     private int getGridHeight() {
-        return getHeight() / Playfield.VISIBLE_HEIGHT;
+        return getHeight() / rowCount;
+    }
+
+    public int getColCount() {
+        return colCount;
+    }
+
+    public void setColCount(int colCount) {
+        this.colCount = colCount;
+    }
+
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
     }
 }

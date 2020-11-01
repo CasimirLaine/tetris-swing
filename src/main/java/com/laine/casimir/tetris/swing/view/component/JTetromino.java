@@ -30,8 +30,6 @@ public class JTetromino extends AbstactTetrisComponent {
             constraints.gridy = positions.getY();
             constraints.weightx = 1.0;
             constraints.weighty = 1.0;
-            constraints.gridwidth = 1;
-            constraints.gridheight = 1;
             final JTetrisSquare square = new JTetrisSquare();
             square.setBackground(getBackground());
             add(square, constraints);

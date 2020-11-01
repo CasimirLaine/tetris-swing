@@ -4,9 +4,12 @@ import com.laine.casimir.tetris.base.control.TetrisController;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SwingKeyControls implements KeyEventDispatcher {
 
+    private final Set<Integer> keysHeld = new HashSet<>();
     private final TetrisController tetrisController;
 
     public SwingKeyControls(TetrisController tetrisController) {
@@ -16,6 +19,12 @@ public class SwingKeyControls implements KeyEventDispatcher {
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
         if (e.getID() != KeyEvent.KEY_PRESSED) {
+            if (e.getID() == KeyEvent.KEY_RELEASED) {
+                keysHeld.remove(e.getKeyCode());
+            }
+            return false;
+        }
+        if (keysHeld.contains(e.getKeyCode())) {
             return false;
         }
         switch (e.getKeyCode()) {
@@ -58,6 +67,7 @@ public class SwingKeyControls implements KeyEventDispatcher {
                 tetrisController.hold();
                 break;
         }
+        keysHeld.add(e.getKeyCode());
         return true;
     }
 }
