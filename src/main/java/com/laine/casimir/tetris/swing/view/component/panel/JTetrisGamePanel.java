@@ -20,9 +20,10 @@ import java.util.List;
 
 class JTetrisGamePanel extends JPanel {
 
+    private final Color transparent = new Color(0, 0, 0, 0);
     private final SwingTetrisSettings settings = new SwingTetrisSettings();
 
-    private final Timer timer;
+    private Timer timer;
 
     private final JFrame frame;
     private final JPauseMenuPanel pauseMenuPanel;
@@ -45,9 +46,9 @@ class JTetrisGamePanel extends JPanel {
         this.tetrisController.setTetrisGameListener(tetrisGameListener);
         timer = new Timer(0, e -> {
             tetrisController.drop();
+            timer.setDelay(tetrisGame.getDropInterval());
         });
         timer.setRepeats(true);
-        timer.setDelay(100);
         init();
     }
 
@@ -107,7 +108,7 @@ class JTetrisGamePanel extends JPanel {
                 break;
             case DROP:
                 for (int index = 0; index < tetrisSquares.size(); index++) {
-                    tetrisSquares.get(index).setBackground(new Color(0, 0, 0, 0));
+                    tetrisSquares.get(index).setBackground(transparent);
                 }
                 final Playfield playfield = tetrisGame.getPlayfield();
                 final List<Square> landedSquares = playfield.getLandedSquares();
