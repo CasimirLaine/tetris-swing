@@ -38,6 +38,9 @@ public class JInfoFragment extends JFragment {
         textPanel.add(linesLabel);
         textPanel.add(linesText);
         add(textPanel, BorderLayout.CENTER);
+        setScore(0);
+        setLevel(1);
+        setLines(0);
     }
 
     public void setScore(int score) {

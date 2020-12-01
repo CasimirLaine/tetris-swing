@@ -45,8 +45,10 @@ class JTetrisGamePanel extends JPanel {
         this.tetrisController = new TetrisController(tetrisGame);
         this.tetrisController.setTetrisGameListener(tetrisGameListener);
         timer = new Timer(0, e -> {
-            tetrisController.drop();
-            timer.setDelay(tetrisGame.getDropInterval());
+            if (!tetrisGame.isGameOver()) {
+                tetrisController.drop();
+                timer.setDelay(tetrisGame.getDropInterval());
+            }
         });
         timer.setRepeats(true);
         init();
@@ -116,8 +118,10 @@ class JTetrisGamePanel extends JPanel {
                     final Square square = landedSquares.get(index);
                     if (square != null) {
                         final Position position = square.getPosition();
-                        tetrisSquares.get(tetrisGrid.getColCount() * position.getY() + position.getX())
-                                .setBackground(Color.decode(square.getColorHex()));
+                        final int uiSquareIndex = tetrisGrid.getColCount() * position.getY() + position.getX();
+                        if (uiSquareIndex >= 0 && uiSquareIndex < tetrisSquares.size()) {
+                            tetrisSquares.get(uiSquareIndex).setBackground(Color.decode(square.getColorHex()));
+                        }
                     }
                 }
                 final FallingTetromino fallingTetromino = playfield.getFallingTetromino();
@@ -126,8 +130,10 @@ class JTetrisGamePanel extends JPanel {
                     final Position[] positions = fallingTetromino.getTetromino().getSquarePositions();
                     final Position offset = fallingTetromino.getPosition();
                     for (Position position : positions) {
-                        tetrisSquares.get(tetrisGrid.getColCount() * (position.getY() + offset.getY()) + (position.getX() + offset.getX()))
-                                .setBackground(Color.decode(tetromino.getColorHex()));
+                        final int uiSquareIndex = tetrisGrid.getColCount() * (position.getY() + offset.getY()) + (position.getX() + offset.getX());
+                        if (uiSquareIndex >= 0 && uiSquareIndex < tetrisSquares.size()) {
+                            tetrisSquares.get(uiSquareIndex).setBackground(Color.decode(tetromino.getColorHex()));
+                        }
                     }
                 }
                 tetrisGrid.revalidate();
@@ -137,6 +143,7 @@ class JTetrisGamePanel extends JPanel {
                 for (int index = 0; index < settings.getNextQueueCount(); index++) {
                     nextTetrominoFragment.addTetromino(tetrisGame.getTetrominoQueue().getPreview(index));
                 }
+                infoFragment.setLines(tetrisGame.getPlayfield().getClearedRows());
                 break;
         }
     };
