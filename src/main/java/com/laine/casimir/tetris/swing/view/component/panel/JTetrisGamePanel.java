@@ -14,7 +14,10 @@ import com.laine.casimir.tetris.swing.view.component.fragment.JNextTetrominoFrag
 import com.laine.casimir.tetris.swing.view.layout.TetrisGridLayout;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,7 @@ class JTetrisGamePanel extends JPanel {
     private final Color transparent = new Color(0, 0, 0, 0);
     private final SwingTetrisSettings settings = new SwingTetrisSettings();
 
+    private final SwingKeyControls gameControls = new SwingKeyControls();
     private Timer timer;
 
     private final JFrame frame;
@@ -58,8 +62,28 @@ class JTetrisGamePanel extends JPanel {
     }
 
     private void init() {
+        addAncestorListener(new AncestorListener() {
+            @Override
+            public void ancestorAdded(AncestorEvent event) {
+                if (event.getAncestor() == JTetrisGamePanel.this) {
+                    gameControls.setTetrisController(tetrisController);
+                    KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(gameControls);
+                }
+            }
+
+            @Override
+            public void ancestorRemoved(AncestorEvent event) {
+                if (event.getAncestor() == JTetrisGamePanel.this) {
+                    gameControls.setTetrisController(null);
+                    KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(gameControls);
+                }
+            }
+
+            @Override
+            public void ancestorMoved(AncestorEvent event) {
+            }
+        });
         setLayout(new GridBagLayout());
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new SwingKeyControls(tetrisController));
         tetrisGrid.setBackground(Color.decode(Playfield.BACKGROUND_COLOR));
         tetrisGrid.setForeground(Color.decode(Playfield.GRID_COLOR));
         tetrisGrid.setLayout(tetrisGridLayout);

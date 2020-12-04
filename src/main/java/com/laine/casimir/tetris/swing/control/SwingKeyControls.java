@@ -10,14 +10,13 @@ import java.util.Set;
 public class SwingKeyControls implements KeyEventDispatcher {
 
     private final Set<Integer> keysHeld = new HashSet<>();
-    private final TetrisController tetrisController;
-
-    public SwingKeyControls(TetrisController tetrisController) {
-        this.tetrisController = tetrisController;
-    }
+    private TetrisController tetrisController;
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
+        if (tetrisController == null) {
+            return false;
+        }
         if (e.getID() != KeyEvent.KEY_PRESSED) {
             if (e.getID() == KeyEvent.KEY_RELEASED) {
                 keysHeld.remove(e.getKeyCode());
@@ -69,5 +68,10 @@ public class SwingKeyControls implements KeyEventDispatcher {
         }
         keysHeld.add(e.getKeyCode());
         return true;
+    }
+
+    public void setTetrisController(TetrisController tetrisController) {
+        this.tetrisController = tetrisController;
+        keysHeld.clear();
     }
 }
