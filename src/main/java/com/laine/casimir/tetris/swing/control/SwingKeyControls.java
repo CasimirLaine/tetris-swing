@@ -91,6 +91,8 @@ public class SwingKeyControls implements KeyEventDispatcher {
                 }
                 tetrisController.hold();
                 break;
+            default:
+                return false;
         }
         keysHeld.put(e.getKeyCode(), now);
         return true;
