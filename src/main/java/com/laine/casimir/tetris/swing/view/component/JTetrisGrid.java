@@ -8,8 +8,8 @@ public class JTetrisGrid extends AbstactTetrisComponent {
 
     private final Stroke stroke = new BasicStroke(LINE_WIDTH);
 
-    private int colCount;
-    private int rowCount;
+    private final int colCount;
+    private final int rowCount;
 
     public JTetrisGrid(int colCount, int rowCount) {
         this.colCount = colCount;
@@ -45,15 +45,7 @@ public class JTetrisGrid extends AbstactTetrisComponent {
         return colCount;
     }
 
-    public void setColCount(int colCount) {
-        this.colCount = colCount;
-    }
-
     public int getRowCount() {
         return rowCount;
-    }
-
-    public void setRowCount(int rowCount) {
-        this.rowCount = rowCount;
     }
 }

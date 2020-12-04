@@ -17,18 +17,6 @@ abstract class AbstactTetrisComponent extends JComponent {
         setOpaque(false);
     }
 
-    public Point getCenterPoint() {
-        return new Point(getWidth() / 2, getHeight() / 2);
-    }
-
-    public int getShorterDimension() {
-        return getWidth() < getHeight() ? getWidth() : getHeight();
-    }
-
-    public int getLongerDimension() {
-        return getWidth() > getHeight() ? getWidth() : getHeight();
-    }
-
     @Override
     protected final void paintComponent(Graphics g) {
         final Graphics2D g2d = (Graphics2D) g;
