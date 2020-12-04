@@ -4,12 +4,14 @@ import com.laine.casimir.tetris.base.control.TetrisController;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SwingKeyControls implements KeyEventDispatcher {
 
-    private final Set<Integer> keysHeld = new HashSet<>();
+    private static final long EVENT_INTERVAL = 25;
+
+    private final Map<Integer, Long> keysHeld = new HashMap<>();
     private TetrisController tetrisController;
 
     @Override
@@ -23,20 +25,29 @@ public class SwingKeyControls implements KeyEventDispatcher {
             }
             return false;
         }
-        if (keysHeld.contains(e.getKeyCode())) {
-            return false;
-        }
+        final Long lastEventTime = keysHeld.get(e.getKeyCode());
+        final long now = System.currentTimeMillis();
+        final long difference = lastEventTime == null ? 0 : (now - lastEventTime);
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
             case KeyEvent.VK_F1:
+                if (lastEventTime != null) {
+                    return false;
+                }
                 tetrisController.pause();
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_NUMPAD4:
+                if (lastEventTime != null && difference < EVENT_INTERVAL) {
+                    return false;
+                }
                 tetrisController.shiftLeft();
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_NUMPAD6:
+                if (lastEventTime != null && difference < EVENT_INTERVAL) {
+                    return false;
+                }
                 tetrisController.shiftRight();
                 break;
             case KeyEvent.VK_UP:
@@ -44,29 +55,44 @@ public class SwingKeyControls implements KeyEventDispatcher {
             case KeyEvent.VK_NUMPAD1:
             case KeyEvent.VK_NUMPAD5:
             case KeyEvent.VK_NUMPAD9:
+                if (lastEventTime != null) {
+                    return false;
+                }
                 tetrisController.rotateClockwise();
                 break;
             case KeyEvent.VK_CONTROL:
             case KeyEvent.VK_Z:
             case KeyEvent.VK_NUMPAD3:
             case KeyEvent.VK_NUMPAD7:
+                if (lastEventTime != null) {
+                    return false;
+                }
                 tetrisController.rotateCounterclockwise();
                 break;
             case KeyEvent.VK_SPACE:
             case KeyEvent.VK_NUMPAD8:
+                if (lastEventTime != null) {
+                    return false;
+                }
                 tetrisController.hardDrop();
                 break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_NUMPAD2:
+                if (lastEventTime != null && difference < EVENT_INTERVAL) {
+                    return false;
+                }
                 tetrisController.softDrop();
                 break;
             case KeyEvent.VK_SHIFT:
             case KeyEvent.VK_C:
             case KeyEvent.VK_NUMPAD0:
+                if (lastEventTime != null) {
+                    return false;
+                }
                 tetrisController.hold();
                 break;
         }
-        keysHeld.add(e.getKeyCode());
+        keysHeld.put(e.getKeyCode(), now);
         return true;
     }
 
