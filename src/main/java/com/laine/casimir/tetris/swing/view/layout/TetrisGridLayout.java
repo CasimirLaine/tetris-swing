@@ -75,24 +75,4 @@ public class TetrisGridLayout implements LayoutManager2 {
             component.setLocation(point.x * gridWidth, point.y * gridHeight);
         }
     }
-
-    public Point getConstraint(Component component) {
-        return components.get(component);
-    }
-
-    public void changeLocation(Component component, int x, int y) {
-        components.get(component).setLocation(x, y);
-    }
-
-    public Component[] getComponentsOfRow(final int rowY) {
-        final Component[] row = new Component[cols];
-        for (final Map.Entry<Component, Point> entry : components.entrySet()) {
-            final Point point = entry.getValue();
-            if (point.y == rowY) {
-                final Component component = entry.getKey();
-                row[point.x] = component;
-            }
-        }
-        return row;
-    }
 }
