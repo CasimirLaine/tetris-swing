@@ -1,7 +1,6 @@
 package com.laine.casimir.tetris.swing.view.component.panel;
 
 import com.laine.casimir.tetris.base.control.TetrisController;
-import com.laine.casimir.tetris.base.event.TetrisGameListener;
 import com.laine.casimir.tetris.base.model.*;
 import com.laine.casimir.tetris.base.model.tetromino.AbstractTetromino;
 import com.laine.casimir.tetris.swing.SwingTetrisSettings;
@@ -17,7 +16,6 @@ import javax.swing.*;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +46,6 @@ class JTetrisGamePanel extends JPanel {
         this.frame = frame;
         this.pauseMenuPanel = new JPauseMenuPanel(frame, this);
         this.tetrisController = new TetrisController(tetrisGame);
-        this.tetrisController.setTetrisGameListener(tetrisGameListener);
         timer = new Timer(0, e -> {
             if (!tetrisGame.isGameOver() && System.currentTimeMillis() - lastDrop >= tetrisGame.getDropInterval()) {
                 tetrisController.drop();
@@ -109,22 +106,21 @@ class JTetrisGamePanel extends JPanel {
             }
         }
         tetrisController.start();
-        timer.start();
+        resume();
     }
 
     public void resume() {
         tetrisController.resume();
-    }
-
-    private void setPausePanelVisible(boolean pausePanelVisible) {
-        if (pausePanelVisible) {
-            frame.setContentPane(pauseMenuPanel);
-        } else {
-            frame.setContentPane(this);
-        }
+        frame.setContentPane(this);
+        timer.start();
     }
 
     private void render() {
+        if (tetrisGame.isPaused()) {
+            timer.stop();
+            frame.setContentPane(pauseMenuPanel);
+            return;
+        }
         for (int index = 0; index < tetrisSquares.size(); index++) {
             tetrisSquares.get(index).setBackground(transparent);
         }
@@ -161,15 +157,4 @@ class JTetrisGamePanel extends JPanel {
         }
         infoFragment.setLines(tetrisGame.getPlayfield().getClearedRows());
     }
-
-    private final TetrisGameListener tetrisGameListener = event -> {
-        switch (event) {
-            case PAUSE:
-                setPausePanelVisible(true);
-                break;
-            case RESUME:
-                setPausePanelVisible(false);
-                break;
-        }
-    };
 }
