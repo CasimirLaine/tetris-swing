@@ -1,6 +1,6 @@
 package com.laine.casimir.tetris.swing.view.component.fragment;
 
-import com.laine.casimir.tetris.base.model.tetromino.AbstractTetromino;
+import com.laine.casimir.tetris.base.model.tetromino.Tetromino;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTetromino;
 import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
@@ -22,7 +22,7 @@ public class JNextTetrominoFragment extends JFragment {
         add(tetrominoPanel, BorderLayout.CENTER);
     }
 
-    public void addTetromino(AbstractTetromino tetromino) {
+    public void addTetromino(Tetromino tetromino) {
         final JTetromino jTetromino = new JTetromino();
         jTetromino.setTetromino(tetromino);
         tetrominoPanel.add(jTetromino);

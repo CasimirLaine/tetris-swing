@@ -1,7 +1,7 @@
 package com.laine.casimir.tetris.swing.view.component;
 
 import com.laine.casimir.tetris.base.model.Position;
-import com.laine.casimir.tetris.base.model.tetromino.AbstractTetromino;
+import com.laine.casimir.tetris.base.model.tetromino.Tetromino;
 
 import java.awt.*;
 
@@ -15,7 +15,7 @@ public class JTetromino extends AbstactTetrisComponent {
         }
     }
 
-    public void setTetromino(AbstractTetromino tetromino) {
+    public void setTetromino(Tetromino tetromino) {
         removeAll();
         if (tetromino == null) {
             return;

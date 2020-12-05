@@ -2,7 +2,7 @@ package com.laine.casimir.tetris.swing.view.component.panel;
 
 import com.laine.casimir.tetris.base.control.TetrisController;
 import com.laine.casimir.tetris.base.model.*;
-import com.laine.casimir.tetris.base.model.tetromino.AbstractTetromino;
+import com.laine.casimir.tetris.base.model.tetromino.Tetromino;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.SwingTetrisSettings;
 import com.laine.casimir.tetris.swing.control.SwingKeyControls;
@@ -134,8 +134,8 @@ class JTetrisGamePanel extends JPanel {
         }
         final FallingTetromino fallingTetromino = playfield.getFallingTetromino();
         if (fallingTetromino != null) {
-            final AbstractTetromino tetromino = fallingTetromino.getTetromino();
-            final Position[] positions = fallingTetromino.getTetromino().getSquarePositions();
+            final Tetromino tetromino = fallingTetromino.getTetromino();
+            final List<Position> positions = fallingTetromino.getTetromino().getSquarePositions();
             final Position offset = fallingTetromino.getPosition();
             for (Position position : positions) {
                 final int uiSquareIndex = tetrisGrid.getColCount() * (position.getY() + offset.getY()) + (position.getX() + offset.getX());
