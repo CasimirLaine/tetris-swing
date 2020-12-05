@@ -1,7 +1,7 @@
 package com.laine.casimir.tetris.swing.view.component;
 
 import com.laine.casimir.tetris.base.model.Position;
-import com.laine.casimir.tetris.base.model.tetromino.Tetromino;
+import com.laine.casimir.tetris.base.model.Tetromino;
 
 import java.awt.*;
 
