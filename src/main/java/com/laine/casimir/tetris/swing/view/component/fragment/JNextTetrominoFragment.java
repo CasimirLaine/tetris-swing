@@ -8,7 +8,7 @@ import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
 import javax.swing.*;
 import java.awt.*;
 
-public class JNextTetrominoFragment extends JFragment {
+public final class JNextTetrominoFragment extends JFragment {
 
     private final JPanel tetrominoPanel = new JPanel();
 

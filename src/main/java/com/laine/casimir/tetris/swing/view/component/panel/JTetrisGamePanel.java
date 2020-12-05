@@ -20,7 +20,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class JTetrisGamePanel extends JPanel {
+final class JTetrisGamePanel extends JPanel {
 
     private final Color transparent = new Color(0, 0, 0, 0);
     private final SwingTetrisSettings settings = new SwingTetrisSettings();
@@ -33,7 +33,6 @@ class JTetrisGamePanel extends JPanel {
 
     private final List<JTetrisSquare> tetrisSquares = new ArrayList<>();
     private final JTetrisGrid tetrisGrid = new JTetrisGrid(Playfield.WIDTH, Playfield.VISIBLE_HEIGHT);
-    private final TetrisGridLayout tetrisGridLayout = new TetrisGridLayout(Playfield.WIDTH, Playfield.VISIBLE_HEIGHT);
     private final JHoldBoxFragment holdBoxFragment = new JHoldBoxFragment();
     private final JNextTetrominoFragment nextTetrominoFragment = new JNextTetrominoFragment();
     private final JInfoFragment infoFragment = new JInfoFragment();
@@ -79,7 +78,7 @@ class JTetrisGamePanel extends JPanel {
         setLayout(new GridBagLayout());
         tetrisGrid.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
         tetrisGrid.setForeground(SwingTetrisConstants.GRID_COLOR);
-        tetrisGrid.setLayout(tetrisGridLayout);
+        tetrisGrid.setLayout(new TetrisGridLayout(tetrisGrid.getColCount(), tetrisGrid.getRowCount()));
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
         constraints.weightx = 0.2;

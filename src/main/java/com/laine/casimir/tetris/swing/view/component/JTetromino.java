@@ -5,7 +5,7 @@ import com.laine.casimir.tetris.base.model.Tetromino;
 
 import java.awt.*;
 
-public class JTetromino extends AbstactTetrisComponent {
+public final class JTetromino extends AbstractTetrisComponent {
 
     @Override
     public void setBackground(Color bg) {

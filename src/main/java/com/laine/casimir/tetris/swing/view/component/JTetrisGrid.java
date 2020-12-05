@@ -2,7 +2,7 @@ package com.laine.casimir.tetris.swing.view.component;
 
 import java.awt.*;
 
-public class JTetrisGrid extends AbstactTetrisComponent {
+public final class JTetrisGrid extends AbstractTetrisComponent {
 
     private static final int LINE_WIDTH = 1;
 
@@ -14,10 +14,6 @@ public class JTetrisGrid extends AbstactTetrisComponent {
     public JTetrisGrid(int colCount, int rowCount) {
         this.colCount = colCount;
         this.rowCount = rowCount;
-        init();
-    }
-
-    private void init() {
     }
 
     @Override

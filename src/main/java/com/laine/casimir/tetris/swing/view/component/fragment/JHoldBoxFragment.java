@@ -7,7 +7,7 @@ import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
 
 import java.awt.*;
 
-public class JHoldBoxFragment extends JFragment {
+public final class JHoldBoxFragment extends JFragment {
 
     private final JTetromino heldTetromino = new JTetromino();
 

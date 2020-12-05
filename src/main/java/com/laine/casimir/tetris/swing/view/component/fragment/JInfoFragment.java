@@ -6,7 +6,7 @@ import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
 import javax.swing.*;
 import java.awt.*;
 
-public class JInfoFragment extends JFragment {
+public final class JInfoFragment extends JFragment {
 
     private static final float FONT_SIZE_TEXT_FIELD = 42F;
 

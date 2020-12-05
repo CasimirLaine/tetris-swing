@@ -4,11 +4,7 @@ import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 
 import javax.swing.*;
 
-public class JTitleLabel extends JLabel {
-
-    public JTitleLabel() {
-        this(null);
-    }
+public final class JTitleLabel extends JLabel {
 
     public JTitleLabel(String text) {
         super(text);

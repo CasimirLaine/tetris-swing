@@ -4,15 +4,15 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TetrisGridLayout implements LayoutManager2 {
+public final class TetrisGridLayout implements LayoutManager2 {
 
-    private final int cols;
-    private final int rows;
+    private final int colCount;
+    private final int rowCount;
     private final Map<Component, Point> components = new HashMap<>();
 
-    public TetrisGridLayout(int cols, int rows) {
-        this.cols = cols;
-        this.rows = rows;
+    public TetrisGridLayout(int colCount, int rowCount) {
+        this.colCount = colCount;
+        this.rowCount = rowCount;
     }
 
     @Override
@@ -66,8 +66,8 @@ public class TetrisGridLayout implements LayoutManager2 {
 
     @Override
     public void layoutContainer(Container parent) {
-        final int gridWidth = parent.getWidth() / cols;
-        final int gridHeight = parent.getHeight() / rows;
+        final int gridWidth = parent.getWidth() / colCount;
+        final int gridHeight = parent.getHeight() / rowCount;
         for (final Map.Entry<Component, Point> entry : components.entrySet()) {
             final Component component = entry.getKey();
             final Point point = entry.getValue();

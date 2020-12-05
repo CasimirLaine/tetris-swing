@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SwingKeyControls implements KeyEventDispatcher {
+public final class SwingKeyControls implements KeyEventDispatcher {
 
     private static final long EVENT_INTERVAL = 25;
 
@@ -27,7 +27,7 @@ public class SwingKeyControls implements KeyEventDispatcher {
         }
         final Long lastEventTime = keysHeld.get(e.getKeyCode());
         final long now = System.currentTimeMillis();
-        final long difference = lastEventTime == null ? 0 : (now - lastEventTime);
+        final long timeSinceLastEvent = lastEventTime == null ? 0 : (now - lastEventTime);
         switch (e.getKeyCode()) {
             case KeyEvent.VK_ESCAPE:
             case KeyEvent.VK_F1:
@@ -38,14 +38,14 @@ public class SwingKeyControls implements KeyEventDispatcher {
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_NUMPAD4:
-                if (lastEventTime != null && difference < EVENT_INTERVAL) {
+                if (lastEventTime != null && timeSinceLastEvent < EVENT_INTERVAL) {
                     return false;
                 }
                 tetrisController.shiftLeft();
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_NUMPAD6:
-                if (lastEventTime != null && difference < EVENT_INTERVAL) {
+                if (lastEventTime != null && timeSinceLastEvent < EVENT_INTERVAL) {
                     return false;
                 }
                 tetrisController.shiftRight();
@@ -78,7 +78,7 @@ public class SwingKeyControls implements KeyEventDispatcher {
                 break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_NUMPAD2:
-                if (lastEventTime != null && difference < EVENT_INTERVAL) {
+                if (lastEventTime != null && timeSinceLastEvent < EVENT_INTERVAL) {
                     return false;
                 }
                 tetrisController.softDrop();
