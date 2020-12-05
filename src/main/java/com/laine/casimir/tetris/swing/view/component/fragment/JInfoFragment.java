@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class JInfoFragment extends JFragment {
 
+    private static final float FONT_SIZE_TEXT_FIELD = 42F;
+
     private final JTextField scoreText = new JTextField("-");
     private final JTextField levelText = new JTextField("-");
     private final JTextField linesText = new JTextField("-");
@@ -18,12 +20,9 @@ public class JInfoFragment extends JFragment {
 
     private void init() {
         setLayout(new BorderLayout());
-        scoreText.setEnabled(false);
-        levelText.setEnabled(false);
-        linesText.setEnabled(false);
-        scoreText.setHorizontalAlignment(SwingConstants.CENTER);
-        levelText.setHorizontalAlignment(SwingConstants.CENTER);
-        linesText.setHorizontalAlignment(SwingConstants.CENTER);
+        configureTextField(scoreText);
+        configureTextField(levelText);
+        configureTextField(linesText);
         final JTitleLabel scoreLabel = new JTitleLabel(TetrisSwingStrings.TITLE_SCORE);
         final JTitleLabel levelLabel = new JTitleLabel(TetrisSwingStrings.TITLE_LEVEL);
         final JTitleLabel linesLabel = new JTitleLabel(TetrisSwingStrings.TITLE_LINES);
@@ -53,5 +52,15 @@ public class JInfoFragment extends JFragment {
 
     public void setLines(int lines) {
         linesText.setText(String.valueOf(lines));
+    }
+
+    private void configureTextField(JTextField textField) {
+        textField.setEnabled(false);
+        textField.setHorizontalAlignment(SwingConstants.CENTER);
+        textField.setBackground(Color.BLACK);
+        textField.setForeground(Color.WHITE);
+        Font scoreFont = textField.getFont();
+        scoreFont = scoreFont.deriveFont(FONT_SIZE_TEXT_FIELD);
+        textField.setFont(scoreFont);
     }
 }

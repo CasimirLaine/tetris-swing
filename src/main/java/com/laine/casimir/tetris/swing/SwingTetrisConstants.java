@@ -19,6 +19,8 @@ public final class SwingTetrisConstants {
     public static final Color COLOR_PANEL_TEXT = Color.WHITE;
     public static final Color COLOR_FRAGMENT_BACKGROUND = COLOR_PANEL_BACKGROUND;
     public static final Color COLOR_FRAGMENT_TEXT = COLOR_PANEL_TEXT;
+    public static final Color BACKGROUND_COLOR = Color.BLACK;
+    public static final Color GRID_COLOR = Color.WHITE;
 
     private SwingTetrisConstants() {}
 }

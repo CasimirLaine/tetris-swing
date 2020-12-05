@@ -3,6 +3,7 @@ package com.laine.casimir.tetris.swing.view.component.panel;
 import com.laine.casimir.tetris.base.control.TetrisController;
 import com.laine.casimir.tetris.base.model.*;
 import com.laine.casimir.tetris.base.model.tetromino.AbstractTetromino;
+import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.SwingTetrisSettings;
 import com.laine.casimir.tetris.swing.control.SwingKeyControls;
 import com.laine.casimir.tetris.swing.view.component.JTetrisGrid;
@@ -25,7 +26,7 @@ class JTetrisGamePanel extends JPanel {
     private final SwingTetrisSettings settings = new SwingTetrisSettings();
 
     private final SwingKeyControls gameControls = new SwingKeyControls();
-    private Timer timer;
+    private final Timer timer;
 
     private final JFrame frame;
     private final JPauseMenuPanel pauseMenuPanel;
@@ -40,17 +41,12 @@ class JTetrisGamePanel extends JPanel {
     private final TetrisGame tetrisGame = new TetrisGame();
     private final TetrisController tetrisController;
 
-    private long lastDrop;
-
     public JTetrisGamePanel(JFrame frame) {
         this.frame = frame;
         this.pauseMenuPanel = new JPauseMenuPanel(frame, this);
         this.tetrisController = new TetrisController(tetrisGame);
         timer = new Timer(0, e -> {
-            if (!tetrisGame.isGameOver() && System.currentTimeMillis() - lastDrop >= tetrisGame.getDropInterval()) {
-                tetrisController.drop();
-                lastDrop = System.currentTimeMillis();
-            }
+            tetrisController.update();
             render();
         });
         timer.setDelay(0);
@@ -81,8 +77,8 @@ class JTetrisGamePanel extends JPanel {
             }
         });
         setLayout(new GridBagLayout());
-        tetrisGrid.setBackground(Color.decode(Playfield.BACKGROUND_COLOR));
-        tetrisGrid.setForeground(Color.decode(Playfield.GRID_COLOR));
+        tetrisGrid.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
+        tetrisGrid.setForeground(SwingTetrisConstants.GRID_COLOR);
         tetrisGrid.setLayout(tetrisGridLayout);
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
