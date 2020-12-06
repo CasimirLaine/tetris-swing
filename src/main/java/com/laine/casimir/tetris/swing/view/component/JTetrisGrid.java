@@ -22,13 +22,13 @@ public final class JTetrisGrid extends AbstractTetrisComponent {
         g2d.fillRect(0, 0, getWidth(), getHeight());
         g2d.setColor(getForeground());
         g2d.setStroke(stroke);
-        final int gridSize = getGridSize();
-        final int surplusWidthStart = (int) ((getWidth() - colCount * gridSize) * 0.5F);
-        final int surplusHeightStart = (int) ((getHeight() - rowCount * gridSize) * 0.5F);
-        for (int xIndex = 0, x = 0; xIndex < colCount; xIndex++, x += gridSize) {
-            for (int yIndex = 0, y = 0; yIndex < rowCount; yIndex++, y += gridSize) {
+        final int cellSize = getCellSize();
+        final int surplusWidthStart = (int) ((getWidth() - colCount * cellSize) * 0.5F);
+        final int surplusHeightStart = (int) ((getHeight() - rowCount * cellSize) * 0.5F);
+        for (int xIndex = 0, x = 0; xIndex < colCount; xIndex++, x += cellSize) {
+            for (int yIndex = 0, y = 0; yIndex < rowCount; yIndex++, y += cellSize) {
                 g2d.drawRect(surplusWidthStart + x, surplusHeightStart + y,
-                        gridSize, gridSize);
+                        cellSize, cellSize);
             }
         }
     }
@@ -41,7 +41,7 @@ public final class JTetrisGrid extends AbstractTetrisComponent {
         return rowCount;
     }
 
-    private int getGridSize() {
+    private int getCellSize() {
         final int gridWidth = getWidth() / colCount;
         final int gridHeight = getHeight() / rowCount;
         return Math.min(gridWidth, gridHeight);
