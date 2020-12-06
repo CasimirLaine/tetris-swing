@@ -45,10 +45,7 @@ final class JTetrisGamePanel extends JPanel {
         this.frame = frame;
         this.pauseMenuPanel = new JPauseMenuPanel(frame, this);
         this.tetrisController = new TetrisController();
-        timer = new Timer(0, e -> {
-            tetrisController.update();
-            render();
-        });
+        timer = new Timer(0, e -> update());
         timer.setDelay(0);
         timer.setRepeats(true);
         init();
@@ -111,12 +108,17 @@ final class JTetrisGamePanel extends JPanel {
         timer.start();
     }
 
-    private void render() {
+    private void update() {
         if (tetrisController.isPaused()) {
             timer.stop();
             frame.setContentPane(pauseMenuPanel);
             return;
         }
+        tetrisController.update();
+        render();
+    }
+
+    private void render() {
         for (int index = 0; index < tetrisSquares.size(); index++) {
             tetrisSquares.get(index).setBackground(transparent);
         }

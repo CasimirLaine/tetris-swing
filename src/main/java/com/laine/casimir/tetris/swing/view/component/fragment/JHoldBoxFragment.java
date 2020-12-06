@@ -1,6 +1,7 @@
 package com.laine.casimir.tetris.swing.view.component.fragment;
 
 import com.laine.casimir.tetris.base.model.Tetromino;
+import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTetromino;
 import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
@@ -17,6 +18,7 @@ public final class JHoldBoxFragment extends JFragment {
 
     private void init() {
         add(new JTitleLabel(TetrisSwingStrings.TITLE_HOLD), BorderLayout.NORTH);
+        heldTetromino.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
         add(heldTetromino, BorderLayout.CENTER);
     }
 

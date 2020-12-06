@@ -10,9 +10,16 @@ public final class TetrisGridLayout implements LayoutManager2 {
     private final int rowCount;
     private final Map<Component, Point> components = new HashMap<>();
 
+    private final Integer lockedCellSize;
+
     public TetrisGridLayout(int colCount, int rowCount) {
+        this(colCount, rowCount, null);
+    }
+
+    public TetrisGridLayout(int colCount, int rowCount, Integer lockedCellSize) {
         this.colCount = colCount;
         this.rowCount = rowCount;
+        this.lockedCellSize = lockedCellSize;
     }
 
     @Override
@@ -50,29 +57,47 @@ public final class TetrisGridLayout implements LayoutManager2 {
     }
 
     @Override
-    public Dimension preferredLayoutSize(Container parent) {
-        return new Dimension();
+    public Dimension preferredLayoutSize(Container target) {
+        final Container parent = target.getParent();
+        if (parent != null) {
+            final int parentCellSize = lockedCellSize != null ? lockedCellSize : getCellSize(parent);
+            return new Dimension(parentCellSize * colCount, parentCellSize * rowCount);
+        } else {
+            return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        }
     }
 
     @Override
-    public Dimension minimumLayoutSize(Container parent) {
-        return new Dimension();
+    public Dimension minimumLayoutSize(Container target) {
+        return new Dimension(colCount, rowCount);
     }
 
     @Override
     public Dimension maximumLayoutSize(Container target) {
-        return new Dimension();
+        final Container parent = target.getParent();
+        if (parent != null) {
+            return new Dimension(parent.getWidth(), parent.getHeight());
+        } else {
+            return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        }
     }
 
     @Override
-    public void layoutContainer(Container parent) {
-        final int gridWidth = parent.getWidth() / colCount;
-        final int gridHeight = parent.getHeight() / rowCount;
+    public void layoutContainer(Container target) {
+        final int cellSize = lockedCellSize != null ? lockedCellSize : getCellSize(target);
+        final int surplusWidthStart = (int) ((target.getWidth() - colCount * cellSize) * 0.5F);
+        final int surplusHeightStart = (int) ((target.getHeight() - rowCount * cellSize) * 0.5F);
         for (final Map.Entry<Component, Point> entry : components.entrySet()) {
             final Component component = entry.getKey();
             final Point point = entry.getValue();
-            component.setSize(gridWidth, gridHeight);
-            component.setLocation(point.x * gridWidth, point.y * gridHeight);
+            component.setSize(cellSize, cellSize);
+            component.setLocation(surplusWidthStart + point.x * cellSize, surplusHeightStart + point.y * cellSize);
         }
+    }
+
+    private int getCellSize(Container target) {
+        final int gridWidth = target.getWidth() / colCount;
+        final int gridHeight = target.getHeight() / rowCount;
+        return Math.min(gridWidth, gridHeight);
     }
 }
