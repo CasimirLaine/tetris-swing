@@ -17,8 +17,13 @@ public final class SwingManager {
 
     private void init() {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(SwingTetrisConstants.WINDOW_DEFAULT_WIDTH, SwingTetrisConstants.WINDOW_DEFAULT_HEIGHT));
-        frame.setMinimumSize(new Dimension(SwingTetrisConstants.WINDOW_MIN_WIDTH, SwingTetrisConstants.WINDOW_MIN_HEIGHT));
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        final int screenWidth = screenSize.width;
+        final int screenHeight = screenSize.height;
+        frame.setPreferredSize(new Dimension(Math.min(SwingTetrisConstants.WINDOW_DEFAULT_WIDTH, screenWidth),
+                Math.min(SwingTetrisConstants.WINDOW_DEFAULT_HEIGHT, screenHeight)));
+        frame.setMinimumSize(new Dimension(Math.min(SwingTetrisConstants.WINDOW_MIN_WIDTH, screenWidth),
+                Math.min(SwingTetrisConstants.WINDOW_MIN_HEIGHT, screenHeight)));
         frame.setContentPane(new JMainMenuPanel(frame));
         frame.pack();
         frame.setVisible(true);
