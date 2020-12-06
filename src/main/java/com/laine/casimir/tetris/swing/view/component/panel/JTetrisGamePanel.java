@@ -19,6 +19,8 @@ import javax.swing.*;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +76,14 @@ final class JTetrisGamePanel extends JPanel {
             }
         });
         setLayout(new GridBagLayout());
+        tetrisGrid.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                final int cellSize = tetrisGrid.getCellSize();
+                holdBoxFragment.setCellSize(cellSize);
+                nextTetrominoFragment.setCellSize(cellSize);
+            }
+        });
         tetrisGrid.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
         tetrisGrid.setForeground(SwingTetrisConstants.GRID_COLOR);
         tetrisGrid.setLayout(new TetrisGridLayout(tetrisGrid.getColCount(), tetrisGrid.getRowCount()));

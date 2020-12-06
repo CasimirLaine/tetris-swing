@@ -41,9 +41,9 @@ public final class JTetrisGrid extends AbstractTetrisComponent {
         return rowCount;
     }
 
-    private int getCellSize() {
-        final int gridWidth = getWidth() / colCount;
-        final int gridHeight = getHeight() / rowCount;
-        return Math.min(gridWidth, gridHeight);
+    public int getCellSize() {
+        final int cellWidth = getWidth() / colCount;
+        final int cellHeight = getHeight() / rowCount;
+        return Math.min(cellWidth, cellHeight);
     }
 }

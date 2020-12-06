@@ -25,4 +25,8 @@ public final class JHoldBoxFragment extends JFragment {
     public void setTetromino(Tetromino tetromino) {
         heldTetromino.setTetromino(tetromino);
     }
+
+    public void setCellSize(int cellSize) {
+        heldTetromino.setCellSize(cellSize);
+    }
 }

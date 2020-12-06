@@ -10,7 +10,7 @@ public final class TetrisGridLayout implements LayoutManager2 {
     private final int rowCount;
     private final Map<Component, Point> components = new HashMap<>();
 
-    private final Integer lockedCellSize;
+    private Integer lockedCellSize;
 
     public TetrisGridLayout(int colCount, int rowCount) {
         this(colCount, rowCount, null);
@@ -96,8 +96,12 @@ public final class TetrisGridLayout implements LayoutManager2 {
     }
 
     private int getCellSize(Container target) {
-        final int gridWidth = target.getWidth() / colCount;
-        final int gridHeight = target.getHeight() / rowCount;
-        return Math.min(gridWidth, gridHeight);
+        final int cellWidth = target.getWidth() / colCount;
+        final int cellHeight = target.getHeight() / rowCount;
+        return Math.min(cellWidth, cellHeight);
+    }
+
+    public void setLockedCellSize(Integer lockedCellSize) {
+        this.lockedCellSize = lockedCellSize;
     }
 }

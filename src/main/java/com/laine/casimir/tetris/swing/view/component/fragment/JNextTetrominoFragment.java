@@ -13,6 +13,8 @@ public final class JNextTetrominoFragment extends JFragment {
 
     private final JPanel tetrominoPanel = new JPanel();
 
+    private int cellSize;
+
     public JNextTetrominoFragment() {
         init();
     }
@@ -27,10 +29,21 @@ public final class JNextTetrominoFragment extends JFragment {
         final JTetromino jTetromino = new JTetromino();
         jTetromino.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
         jTetromino.setTetromino(tetromino);
+        jTetromino.setCellSize(cellSize);
         tetrominoPanel.add(jTetromino);
     }
 
     public void clear() {
         tetrominoPanel.removeAll();
+    }
+
+    public void setCellSize(int cellSize) {
+        this.cellSize = cellSize;
+        final Component[] components = tetrominoPanel.getComponents();
+        for (final Component component : components) {
+            if (component instanceof JTetromino) {
+                ((JTetromino) component).setCellSize(cellSize);
+            }
+        }
     }
 }
