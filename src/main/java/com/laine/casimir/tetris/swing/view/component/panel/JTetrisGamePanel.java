@@ -2,7 +2,6 @@ package com.laine.casimir.tetris.swing.view.component.panel;
 
 import com.laine.casimir.tetris.base.control.TetrisController;
 import com.laine.casimir.tetris.base.model.*;
-import com.laine.casimir.tetris.base.model.Tetromino;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.SwingTetrisSettings;
 import com.laine.casimir.tetris.swing.control.SwingKeyControls;
@@ -37,13 +36,12 @@ final class JTetrisGamePanel extends JPanel {
     private final JNextTetrominoFragment nextTetrominoFragment = new JNextTetrominoFragment();
     private final JInfoFragment infoFragment = new JInfoFragment();
 
-    private final TetrisGame tetrisGame = new TetrisGame();
     private final TetrisController tetrisController;
 
     public JTetrisGamePanel(JFrame frame) {
         this.frame = frame;
         this.pauseMenuPanel = new JPauseMenuPanel(frame, this);
-        this.tetrisController = new TetrisController(tetrisGame);
+        this.tetrisController = new TetrisController();
         timer = new Timer(0, e -> {
             tetrisController.update();
             render();
@@ -111,7 +109,7 @@ final class JTetrisGamePanel extends JPanel {
     }
 
     private void render() {
-        if (tetrisGame.isPaused()) {
+        if (tetrisController.isPaused()) {
             timer.stop();
             frame.setContentPane(pauseMenuPanel);
             return;
@@ -119,7 +117,7 @@ final class JTetrisGamePanel extends JPanel {
         for (int index = 0; index < tetrisSquares.size(); index++) {
             tetrisSquares.get(index).setBackground(transparent);
         }
-        final Playfield playfield = tetrisGame.getPlayfield();
+        final Playfield playfield = tetrisController.getPlayfield();
         final List<Square> landedSquares = playfield.getLandedSquares();
         for (int index = 0; index < landedSquares.size(); index++) {
             final Square square = landedSquares.get(index);
@@ -145,11 +143,14 @@ final class JTetrisGamePanel extends JPanel {
         }
         tetrisGrid.revalidate();
         tetrisGrid.repaint();
-        holdBoxFragment.setTetromino(tetrisGame.getHoldBox().getTetromino());
+        holdBoxFragment.setTetromino(tetrisController.getHeldTetromino());
         nextTetrominoFragment.clear();
-        for (int index = 0; index < settings.getNextQueueCount(); index++) {
-            nextTetrominoFragment.addTetromino(tetrisGame.getTetrominoQueue().getPreview(index));
+        final Tetromino[] previewTetrominos = tetrisController.getPreviewTetrominos(settings.getNextQueueCount());
+        for (final Tetromino tetromino : previewTetrominos) {
+            nextTetrominoFragment.addTetromino(tetromino);
         }
-        infoFragment.setLines(tetrisGame.getPlayfield().getClearedRows());
+        infoFragment.setScore(tetrisController.getScore());
+        infoFragment.setLevel(tetrisController.getLevel());
+        infoFragment.setLines(tetrisController.getClearedRows());
     }
 }
