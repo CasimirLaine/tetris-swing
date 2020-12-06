@@ -2,6 +2,7 @@ package com.laine.casimir.tetris.swing.view.component;
 
 import com.laine.casimir.tetris.base.model.Position;
 import com.laine.casimir.tetris.base.model.Tetromino;
+import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.view.layout.TetrisGridLayout;
 
 import javax.swing.*;
@@ -32,6 +33,7 @@ public final class JTetromino extends JPanel {
         for (final Position position : tetromino.getSquarePositions()) {
             final JTetrisSquare square = new JTetrisSquare();
             square.setBackground(Color.decode(tetromino.getColorHex()));
+            square.setForeground(SwingTetrisConstants.BACKGROUND_COLOR);
             add(square, new Point(position.getX(), position.getY()));
         }
         setFocusable(false);

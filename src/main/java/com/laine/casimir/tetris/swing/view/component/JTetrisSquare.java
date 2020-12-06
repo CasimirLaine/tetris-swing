@@ -24,6 +24,7 @@ public final class JTetrisSquare extends AbstractTetrisComponent {
         rectangle.height = getHeight();
         g2d.setColor(getBackground());
         g2d.fill(rectangle);
+        g2d.setColor(getForeground());
         g2d.setStroke(stroke);
         g2d.draw(rectangle);
     }

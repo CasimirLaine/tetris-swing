@@ -104,6 +104,7 @@ final class JTetrisGamePanel extends JPanel {
             for (int x = 0; x < tetrisGrid.getColCount(); x++) {
                 final JTetrisSquare tetrisSquare = new JTetrisSquare();
                 tetrisSquare.setBackground(new Color(0, 0, 0, 0));
+                tetrisSquare.setForeground(SwingTetrisConstants.BACKGROUND_COLOR);
                 tetrisGrid.add(tetrisSquare, new Point(x, y));
                 tetrisSquares.add(tetrisSquare);
             }
