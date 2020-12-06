@@ -1,7 +1,7 @@
 package com.laine.casimir.tetris.swing.view.component.panel;
 
-import com.laine.casimir.tetris.base.control.TetrisController;
-import com.laine.casimir.tetris.base.model.Playfield;
+import com.laine.casimir.tetris.base.api.TetrisConstants;
+import com.laine.casimir.tetris.base.api.TetrisController;
 import com.laine.casimir.tetris.base.model.Position;
 import com.laine.casimir.tetris.base.model.Square;
 import com.laine.casimir.tetris.base.model.Tetromino;
@@ -36,7 +36,7 @@ final class JTetrisGamePanel extends JPanel {
     private final JPauseMenuPanel pauseMenuPanel;
 
     private final List<JTetrisSquare> tetrisSquares = new ArrayList<>();
-    private final JTetrisGrid tetrisGrid = new JTetrisGrid(Playfield.WIDTH, Playfield.VISIBLE_HEIGHT);
+    private final JTetrisGrid tetrisGrid = new JTetrisGrid(TetrisConstants.WIDTH, TetrisConstants.VISIBLE_HEIGHT);
     private final JHoldBoxFragment holdBoxFragment = new JHoldBoxFragment();
     private final JNextTetrominoFragment nextTetrominoFragment = new JNextTetrominoFragment();
     private final JInfoFragment infoFragment = new JInfoFragment();

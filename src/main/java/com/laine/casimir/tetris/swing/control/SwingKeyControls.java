@@ -1,6 +1,6 @@
 package com.laine.casimir.tetris.swing.control;
 
-import com.laine.casimir.tetris.base.control.TetrisController;
+import com.laine.casimir.tetris.base.api.TetrisController;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
