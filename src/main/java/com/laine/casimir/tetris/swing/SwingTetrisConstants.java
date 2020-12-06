@@ -7,9 +7,9 @@ import java.awt.*;
 public final class SwingTetrisConstants {
 
     public static final String APP_NAME = "Tetris Swing";
-    public static final int WINDOW_DEFAULT_WIDTH = (TetrisConstants.WIDTH + 8) * 50;
+    public static final int WINDOW_DEFAULT_WIDTH = (TetrisConstants.WIDTH + 10) * 50;
     public static final int WINDOW_DEFAULT_HEIGHT = TetrisConstants.VISIBLE_HEIGHT * 50;
-    public static final int WINDOW_MIN_WIDTH = (TetrisConstants.WIDTH + 8) * 40;
+    public static final int WINDOW_MIN_WIDTH = (TetrisConstants.WIDTH + 10) * 40;
     public static final int WINDOW_MIN_HEIGHT = TetrisConstants.VISIBLE_HEIGHT * 40;
     public static final int PADDING_PANEL = 64;
     public static final int PADDING_PANEL_TITLE = 8;

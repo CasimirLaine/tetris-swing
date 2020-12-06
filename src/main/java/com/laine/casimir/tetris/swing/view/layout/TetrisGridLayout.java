@@ -1,6 +1,7 @@
 package com.laine.casimir.tetris.swing.view.layout;
 
 import java.awt.*;
+import java.awt.event.ComponentEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ public final class TetrisGridLayout implements LayoutManager2 {
     private final Map<Component, Point> components = new HashMap<>();
 
     private Integer lockedCellSize;
+
+    private boolean initialResizeDispached;
 
     public TetrisGridLayout(int colCount, int rowCount) {
         this(colCount, rowCount, null);
@@ -92,6 +95,10 @@ public final class TetrisGridLayout implements LayoutManager2 {
             final Point point = entry.getValue();
             component.setSize(cellSize, cellSize);
             component.setLocation(surplusWidthStart + point.x * cellSize, surplusHeightStart + point.y * cellSize);
+        }
+        if (!initialResizeDispached && cellSize > 0) {
+            initialResizeDispached = true;
+            target.dispatchEvent(new ComponentEvent(target, ComponentEvent.COMPONENT_RESIZED));
         }
     }
 

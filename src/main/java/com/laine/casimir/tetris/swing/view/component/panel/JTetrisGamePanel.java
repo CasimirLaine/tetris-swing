@@ -75,31 +75,23 @@ final class JTetrisGamePanel extends JPanel {
             public void ancestorMoved(AncestorEvent event) {
             }
         });
-        setLayout(new GridBagLayout());
+        final JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.add(holdBoxFragment);
+        leftPanel.add(infoFragment);
         tetrisGrid.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 final int cellSize = tetrisGrid.getCellSize();
                 holdBoxFragment.setCellSize(cellSize);
                 nextTetrominoFragment.setCellSize(cellSize);
+                leftPanel.setPreferredSize(new Dimension(cellSize * 5, getHeight()));
+                nextTetrominoFragment.setPreferredSize(new Dimension(cellSize * 5, getHeight()));
             }
         });
         tetrisGrid.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
         tetrisGrid.setForeground(SwingTetrisConstants.GRID_COLOR);
         tetrisGrid.setLayout(new TetrisGridLayout(tetrisGrid.getColCount(), tetrisGrid.getRowCount()));
-        final GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.weightx = 0.2;
-        constraints.weighty = 1.0;
-        final JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.add(holdBoxFragment);
-        leftPanel.add(infoFragment);
-        add(leftPanel, constraints.clone());
-        constraints.weightx = 0.6;
-        add(tetrisGrid, constraints.clone());
-        constraints.weightx = 0.2;
-        add(nextTetrominoFragment, constraints.clone());
         for (int y = 0; y < tetrisGrid.getRowCount(); y++) {
             for (int x = 0; x < tetrisGrid.getColCount(); x++) {
                 final JTetrisSquare tetrisSquare = new JTetrisSquare();
@@ -109,6 +101,10 @@ final class JTetrisGamePanel extends JPanel {
                 tetrisSquares.add(tetrisSquare);
             }
         }
+        setLayout(new BorderLayout());
+        add(leftPanel, BorderLayout.WEST);
+        add(tetrisGrid, BorderLayout.CENTER);
+        add(nextTetrominoFragment, BorderLayout.EAST);
         tetrisController.start();
         resume();
     }
