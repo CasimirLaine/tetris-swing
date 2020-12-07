@@ -9,8 +9,8 @@ public class JMainMenuPanel extends JMenuPanel {
 
     private final JFrame frame;
 
-    private final Button playButton = new Button(TetrisSwingStrings.MAIN_MENU_PLAY);
-    private final Button quitButton = new Button(TetrisSwingStrings.MAIN_MENU_QUIT);
+    private final JButton playButton = new JButton(TetrisSwingStrings.MAIN_MENU_PLAY);
+    private final JButton quitButton = new JButton(TetrisSwingStrings.MAIN_MENU_QUIT);
 
     public JMainMenuPanel(JFrame frame) {
         this.frame = frame;
@@ -22,9 +22,9 @@ public class JMainMenuPanel extends JMenuPanel {
         playButton.addActionListener(e -> frame.setContentPane(new JTetrisGamePanel(frame)));
         quitButton.addActionListener(e -> frame.dispose());
         final JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
-        buttonsPanel.add(playButton, BorderLayout.CENTER);
-        buttonsPanel.add(quitButton, BorderLayout.SOUTH);
+        buttonsPanel.setLayout(new GridLayout(2, 0));
+        buttonsPanel.add(playButton);
+        buttonsPanel.add(quitButton);
         add(buttonsPanel, BorderLayout.CENTER);
     }
 }

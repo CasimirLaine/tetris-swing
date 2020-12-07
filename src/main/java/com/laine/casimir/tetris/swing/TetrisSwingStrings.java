@@ -11,6 +11,7 @@ public final class TetrisSwingStrings {
     public static final String TITLE_SCORE = "SCORE";
     public static final String TITLE_LEVEL = "LEVEL";
     public static final String TITLE_LINES = "LINES";
+    public static final String TITLE_GAME_OVER = "GAME OVER";
     public static final String PAUSE_MENU_TITLE = "PAUSED";
     public static final String PAUSE_MENU_RESUME = "RESUME";
     public static final String PAUSE_MENU_QUIT = "QUIT";

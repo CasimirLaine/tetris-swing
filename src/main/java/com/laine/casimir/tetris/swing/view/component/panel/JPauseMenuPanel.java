@@ -9,8 +9,8 @@ class JPauseMenuPanel extends JMenuPanel {
 
     private final JFrame frame;
     private final JTetrisGamePanel tetrisGamePanel;
-    private final Button resumeButton = new Button(TetrisSwingStrings.PAUSE_MENU_RESUME);
-    private final Button quitButton = new Button(TetrisSwingStrings.PAUSE_MENU_QUIT);
+    private final JButton resumeButton = new JButton(TetrisSwingStrings.PAUSE_MENU_RESUME);
+    private final JButton quitButton = new JButton(TetrisSwingStrings.PAUSE_MENU_QUIT);
 
     public JPauseMenuPanel(JFrame frame, JTetrisGamePanel tetrisGamePanel) {
         this.frame = frame;
@@ -23,9 +23,9 @@ class JPauseMenuPanel extends JMenuPanel {
         resumeButton.addActionListener(e -> tetrisGamePanel.resume());
         quitButton.addActionListener(e -> frame.setContentPane(new JMainMenuPanel(frame)));
         final JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
-        buttonsPanel.add(resumeButton, BorderLayout.CENTER);
-        buttonsPanel.add(quitButton, BorderLayout.SOUTH);
+        buttonsPanel.setLayout(new GridLayout(2, 1));
+        buttonsPanel.add(resumeButton);
+        buttonsPanel.add(quitButton);
         add(buttonsPanel, BorderLayout.CENTER);
     }
 }

@@ -9,6 +9,7 @@ import com.laine.casimir.tetris.swing.SwingTetrisSettings;
 import com.laine.casimir.tetris.swing.control.SwingKeyControls;
 import com.laine.casimir.tetris.swing.view.component.JTetrisGrid;
 import com.laine.casimir.tetris.swing.view.component.JTetrisSquare;
+import com.laine.casimir.tetris.swing.view.component.fragment.GameOverFragment;
 import com.laine.casimir.tetris.swing.view.component.fragment.JHoldBoxFragment;
 import com.laine.casimir.tetris.swing.view.component.fragment.JInfoFragment;
 import com.laine.casimir.tetris.swing.view.component.fragment.JNextTetrominoFragment;
@@ -23,7 +24,7 @@ import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-final class JTetrisGamePanel extends JPanel {
+public final class JTetrisGamePanel extends JPanel {
 
     private final Color transparent = new Color(0, 0, 0, 0);
     private final SwingTetrisSettings settings = new SwingTetrisSettings();
@@ -39,12 +40,14 @@ final class JTetrisGamePanel extends JPanel {
     private final JHoldBoxFragment holdBoxFragment = new JHoldBoxFragment();
     private final JNextTetrominoFragment nextTetrominoFragment = new JNextTetrominoFragment();
     private final JInfoFragment infoFragment = new JInfoFragment();
+    private final GameOverFragment gameOverFragment;
 
     private final TetrisController tetrisController;
 
     public JTetrisGamePanel(JFrame frame) {
         this.frame = frame;
         this.pauseMenuPanel = new JPauseMenuPanel(frame, this);
+        this.gameOverFragment = new GameOverFragment(frame, this);
         this.tetrisController = new TetrisController();
         timer = new Timer(0, e -> update());
         timer.setDelay(0);
@@ -100,10 +103,14 @@ final class JTetrisGamePanel extends JPanel {
                 tetrisSquares.add(tetrisSquare);
             }
         }
-        setLayout(new BorderLayout());
-        add(leftPanel, BorderLayout.WEST);
-        add(tetrisGrid, BorderLayout.CENTER);
-        add(nextTetrominoFragment, BorderLayout.EAST);
+        final JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(leftPanel, BorderLayout.WEST);
+        panel.add(tetrisGrid, BorderLayout.CENTER);
+        panel.add(nextTetrominoFragment, BorderLayout.EAST);
+        setLayout(new OverlayLayout(this));
+        add(panel);
+        add(gameOverFragment);
         tetrisController.start();
         resume();
     }
@@ -115,12 +122,15 @@ final class JTetrisGamePanel extends JPanel {
     }
 
     private void update() {
+        tetrisController.update();
         if (tetrisController.isPaused()) {
             timer.stop();
             frame.setContentPane(pauseMenuPanel);
-            return;
         }
-        tetrisController.update();
+        if (tetrisController.isGameOver()) {
+            timer.stop();
+            gameOverFragment.setVisible(true);
+        }
         render();
     }
 
