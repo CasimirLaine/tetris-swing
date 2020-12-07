@@ -1,12 +1,13 @@
 package com.laine.casimir.tetris.swing.view.component;
 
-import com.laine.casimir.tetris.base.model.Position;
-import com.laine.casimir.tetris.base.model.Tetromino;
+import com.laine.casimir.tetris.base.api.model.BaseTetromino;
+import com.laine.casimir.tetris.base.api.model.TetrisCell;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.view.layout.TetrisGridLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public final class JTetromino extends JPanel {
 
@@ -22,7 +23,7 @@ public final class JTetromino extends JPanel {
         }
     }
 
-    public void setTetromino(Tetromino tetromino) {
+    public void setTetromino(BaseTetromino tetromino) {
         layout = null;
         removeAll();
         if (tetromino == null) {
@@ -30,11 +31,13 @@ public final class JTetromino extends JPanel {
         }
         layout = new TetrisGridLayout(tetromino.getDimension(), tetromino.getDimension(), cellSize);
         setLayout(layout);
-        for (final Position position : tetromino.getSquarePositions()) {
-            final JTetrisSquare square = new JTetrisSquare();
-            square.setBackground(Color.decode(tetromino.getColorHex()));
-            square.setForeground(SwingTetrisConstants.BACKGROUND_COLOR);
-            add(square, new Point(position.getX(), position.getY()));
+        final List<TetrisCell> tetrisCellList = tetromino.getTetrisCells();
+        for (int index = 0; index < tetrisCellList.size(); index++) {
+            final TetrisCell tetrisCell = tetrisCellList.get(index);
+            final JTetrisSquare jTetrisSquare = new JTetrisSquare();
+            jTetrisSquare.setBackground(Color.decode(tetrisCell.getColorHex()));
+            jTetrisSquare.setForeground(SwingTetrisConstants.BACKGROUND_COLOR);
+            add(jTetrisSquare, new Point(tetrisCell.getX(), tetrisCell.getY()));
         }
         setFocusable(false);
     }

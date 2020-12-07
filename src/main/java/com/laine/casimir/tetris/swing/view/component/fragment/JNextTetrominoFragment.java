@@ -1,6 +1,6 @@
 package com.laine.casimir.tetris.swing.view.component.fragment;
 
-import com.laine.casimir.tetris.base.model.Tetromino;
+import com.laine.casimir.tetris.base.api.model.BaseTetromino;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTetromino;
@@ -25,7 +25,7 @@ public final class JNextTetrominoFragment extends JFragment {
         add(tetrominoPanel, BorderLayout.CENTER);
     }
 
-    public void addTetromino(Tetromino tetromino) {
+    public void addTetromino(BaseTetromino tetromino) {
         final JTetromino jTetromino = new JTetromino();
         jTetromino.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
         jTetromino.setTetromino(tetromino);
@@ -39,8 +39,7 @@ public final class JNextTetrominoFragment extends JFragment {
 
     public void setCellSize(int cellSize) {
         this.cellSize = cellSize;
-        final Component[] components = tetrominoPanel.getComponents();
-        for (final Component component : components) {
+        for (final Component component : tetrominoPanel.getComponents()) {
             if (component instanceof JTetromino) {
                 ((JTetromino) component).setCellSize(cellSize);
             }

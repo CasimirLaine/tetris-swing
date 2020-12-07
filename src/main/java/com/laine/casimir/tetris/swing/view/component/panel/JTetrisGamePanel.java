@@ -2,9 +2,8 @@ package com.laine.casimir.tetris.swing.view.component.panel;
 
 import com.laine.casimir.tetris.base.api.TetrisConstants;
 import com.laine.casimir.tetris.base.api.TetrisController;
-import com.laine.casimir.tetris.base.model.Position;
-import com.laine.casimir.tetris.base.model.Square;
-import com.laine.casimir.tetris.base.model.Tetromino;
+import com.laine.casimir.tetris.base.api.model.BaseTetromino;
+import com.laine.casimir.tetris.base.api.model.TetrisCell;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.SwingTetrisSettings;
 import com.laine.casimir.tetris.swing.control.SwingKeyControls;
@@ -129,14 +128,13 @@ final class JTetrisGamePanel extends JPanel {
         for (int index = 0; index < tetrisSquares.size(); index++) {
             tetrisSquares.get(index).setBackground(transparent);
         }
-        final List<Square> allSquares = tetrisController.getAllSquares();
+        final List<TetrisCell> allSquares = tetrisController.getAllSquares();
         for (int index = 0; index < allSquares.size(); index++) {
-            final Square square = allSquares.get(index);
-            if (square != null) {
-                final Position position = square.getPosition();
-                final int uiSquareIndex = tetrisGrid.getColCount() * position.getY() + position.getX();
+            final TetrisCell tetrisCell = allSquares.get(index);
+            if (tetrisCell != null) {
+                final int uiSquareIndex = tetrisGrid.getColCount() * tetrisCell.getY() + tetrisCell.getX();
                 if (uiSquareIndex >= 0 && uiSquareIndex < tetrisSquares.size()) {
-                    tetrisSquares.get(uiSquareIndex).setBackground(Color.decode(square.getColorHex()));
+                    tetrisSquares.get(uiSquareIndex).setBackground(Color.decode(tetrisCell.getColorHex()));
                 }
             }
         }
@@ -144,8 +142,8 @@ final class JTetrisGamePanel extends JPanel {
         tetrisGrid.repaint();
         holdBoxFragment.setTetromino(tetrisController.getHeldTetromino());
         nextTetrominoFragment.clear();
-        final Tetromino[] previewTetrominos = tetrisController.getPreviewTetrominos(settings.getNextQueueCount());
-        for (final Tetromino tetromino : previewTetrominos) {
+        final BaseTetromino[] previewTetrominos = tetrisController.getPreviewTetrominos(settings.getNextQueueCount());
+        for (final BaseTetromino tetromino : previewTetrominos) {
             nextTetrominoFragment.addTetromino(tetromino);
         }
         infoFragment.setScore(tetrisController.getScore());

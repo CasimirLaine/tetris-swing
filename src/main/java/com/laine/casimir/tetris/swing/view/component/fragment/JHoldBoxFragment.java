@@ -1,6 +1,6 @@
 package com.laine.casimir.tetris.swing.view.component.fragment;
 
-import com.laine.casimir.tetris.base.model.Tetromino;
+import com.laine.casimir.tetris.base.api.model.BaseTetromino;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTetromino;
@@ -22,7 +22,7 @@ public final class JHoldBoxFragment extends JFragment {
         add(heldTetromino, BorderLayout.CENTER);
     }
 
-    public void setTetromino(Tetromino tetromino) {
+    public void setTetromino(BaseTetromino tetromino) {
         heldTetromino.setTetromino(tetromino);
     }
 
