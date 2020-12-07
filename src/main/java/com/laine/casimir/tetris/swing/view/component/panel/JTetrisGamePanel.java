@@ -24,7 +24,7 @@ import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class JTetrisGamePanel extends JPanel {
+public final class JTetrisGamePanel extends JLayeredPane {
 
     private final Color transparent = new Color(0, 0, 0, 0);
     private final SwingTetrisSettings settings = new SwingTetrisSettings();
@@ -109,8 +109,8 @@ public final class JTetrisGamePanel extends JPanel {
         panel.add(tetrisGrid, BorderLayout.CENTER);
         panel.add(nextTetrominoFragment, BorderLayout.EAST);
         setLayout(new OverlayLayout(this));
-        add(panel);
-        add(gameOverFragment);
+        add(panel, Integer.valueOf(0));
+        add(gameOverFragment, Integer.valueOf(1));
         tetrisController.start();
         resume();
     }
