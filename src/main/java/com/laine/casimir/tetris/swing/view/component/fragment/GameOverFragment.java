@@ -5,8 +5,9 @@ import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
 import com.laine.casimir.tetris.swing.view.component.panel.JMainMenuPanel;
 import com.laine.casimir.tetris.swing.view.component.panel.JTetrisGamePanel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
 
 public class GameOverFragment extends JFragment {
 

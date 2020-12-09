@@ -2,7 +2,9 @@ package com.laine.casimir.tetris.swing.view.component;
 
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public final class JTitleLabel extends JLabel {
 

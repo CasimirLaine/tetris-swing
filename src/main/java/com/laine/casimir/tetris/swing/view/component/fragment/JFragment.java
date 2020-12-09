@@ -2,8 +2,9 @@ package com.laine.casimir.tetris.swing.view.component.fragment;
 
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
 
 class JFragment extends JPanel {
 

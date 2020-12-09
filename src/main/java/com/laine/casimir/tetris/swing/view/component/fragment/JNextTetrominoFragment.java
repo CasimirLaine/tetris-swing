@@ -6,8 +6,10 @@ import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTetromino;
 import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Component;
 
 public final class JNextTetrominoFragment extends JFragment {
 

@@ -2,8 +2,11 @@ package com.laine.casimir.tetris.swing.view.component.panel;
 
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
 
 class JMenuPanel extends JPanel {
 

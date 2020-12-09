@@ -6,7 +6,7 @@ import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTetromino;
 import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
 
-import java.awt.*;
+import java.awt.BorderLayout;
 
 public final class JHoldBoxFragment extends JFragment {
 

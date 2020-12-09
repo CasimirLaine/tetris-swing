@@ -160,10 +160,10 @@ public final class JTetrisGamePanel extends JLayeredPane {
         for (int index = 0; index < tetrisSquares.size(); index++) {
             tetrisSquares.get(index).setBackground(transparent);
         }
-        final List<TetrisCell> allSquares = tetrisController.getAlLCells();
-        renderCells(allSquares, false);
         final List<TetrisCell> ghostCells = tetrisController.getGhostCells();
         renderCells(ghostCells, true);
+        final List<TetrisCell> allSquares = tetrisController.getAlLCells();
+        renderCells(allSquares, false);
         tetrisGrid.revalidate();
         tetrisGrid.repaint();
     }

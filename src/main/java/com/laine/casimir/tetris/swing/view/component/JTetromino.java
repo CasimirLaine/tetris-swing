@@ -5,8 +5,10 @@ import com.laine.casimir.tetris.base.api.model.TetrisCell;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.view.layout.TetrisGridLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Point;
 import java.util.List;
 
 public final class JTetromino extends JPanel {

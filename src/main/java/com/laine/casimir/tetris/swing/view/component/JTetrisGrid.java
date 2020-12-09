@@ -1,6 +1,8 @@
 package com.laine.casimir.tetris.swing.view.component;
 
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 
 public final class JTetrisGrid extends AbstractTetrisComponent {
 
