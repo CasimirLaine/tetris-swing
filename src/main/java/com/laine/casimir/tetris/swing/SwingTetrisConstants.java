@@ -2,7 +2,7 @@ package com.laine.casimir.tetris.swing;
 
 import com.laine.casimir.tetris.base.api.TetrisConstants;
 
-import java.awt.*;
+import java.awt.Color;
 
 public final class SwingTetrisConstants {
 

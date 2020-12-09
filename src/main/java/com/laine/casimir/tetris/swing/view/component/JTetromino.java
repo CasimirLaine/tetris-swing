@@ -34,10 +34,10 @@ public final class JTetromino extends JPanel {
         final List<TetrisCell> tetrisCellList = tetromino.getTetrisCells();
         for (int index = 0; index < tetrisCellList.size(); index++) {
             final TetrisCell tetrisCell = tetrisCellList.get(index);
-            final JTetrisSquare jTetrisSquare = new JTetrisSquare();
-            jTetrisSquare.setBackground(Color.decode(tetrisCell.getColorHex()));
-            jTetrisSquare.setForeground(SwingTetrisConstants.BACKGROUND_COLOR);
-            add(jTetrisSquare, new Point(tetrisCell.getX(), tetrisCell.getY()));
+            final JMino jMino = new JMino();
+            jMino.setBackground(Color.decode(tetrisCell.getColorHex()));
+            jMino.setForeground(SwingTetrisConstants.BACKGROUND_COLOR);
+            add(jMino, new Point(tetrisCell.getX(), tetrisCell.getY()));
         }
         setFocusable(false);
     }

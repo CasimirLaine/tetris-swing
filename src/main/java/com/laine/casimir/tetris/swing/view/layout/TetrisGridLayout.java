@@ -1,6 +1,10 @@
 package com.laine.casimir.tetris.swing.view.layout;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.LayoutManager2;
+import java.awt.Point;
 import java.awt.event.ComponentEvent;
 import java.util.HashMap;
 import java.util.Map;

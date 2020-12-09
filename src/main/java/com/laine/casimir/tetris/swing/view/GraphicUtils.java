@@ -1,6 +1,6 @@
 package com.laine.casimir.tetris.swing.view;
 
-import java.awt.*;
+import java.awt.RenderingHints;
 import java.util.Map;
 
 public final class GraphicUtils {

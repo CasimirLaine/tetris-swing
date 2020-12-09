@@ -4,8 +4,10 @@ import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.view.component.JTetrisFrame;
 import com.laine.casimir.tetris.swing.view.component.panel.JMainMenuPanel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public final class SwingManager {
 

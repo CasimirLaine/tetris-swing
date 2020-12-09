@@ -2,7 +2,7 @@ package com.laine.casimir.tetris.swing;
 
 import com.laine.casimir.tetris.swing.view.SwingManager;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 
 public final class Main {
 

@@ -2,7 +2,7 @@ package com.laine.casimir.tetris.swing.control;
 
 import com.laine.casimir.tetris.base.api.TetrisController;
 
-import java.awt.*;
+import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
