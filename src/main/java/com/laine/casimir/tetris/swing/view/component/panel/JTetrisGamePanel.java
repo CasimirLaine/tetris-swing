@@ -3,6 +3,7 @@ package com.laine.casimir.tetris.swing.view.component.panel;
 import com.laine.casimir.tetris.base.api.TetrisConstants;
 import com.laine.casimir.tetris.base.api.TetrisController;
 import com.laine.casimir.tetris.base.api.model.BaseTetromino;
+import com.laine.casimir.tetris.base.api.model.ClearData;
 import com.laine.casimir.tetris.base.api.model.TetrisCell;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.SwingTetrisSettings;
@@ -39,7 +40,9 @@ public final class JTetrisGamePanel extends JLayeredPane {
     private final SwingTetrisSettings settings = new SwingTetrisSettings();
 
     private final SwingKeyControls gameControls = new SwingKeyControls();
-    private final Timer timer;
+    private final Timer gameLoopTimer;
+
+    private final Timer clearAnimationTimer;
 
     private final JFrame frame;
     private final JPauseMenuPanel pauseMenuPanel;
@@ -53,14 +56,22 @@ public final class JTetrisGamePanel extends JLayeredPane {
 
     private final TetrisController tetrisController;
 
+    private ClearData clearData;
+
+    private long clearAnimationStarted;
+    private boolean clearInvisible;
+
     public JTetrisGamePanel(JFrame frame) {
         this.frame = frame;
         this.pauseMenuPanel = new JPauseMenuPanel(frame, this);
         this.gameOverFragment = new GameOverFragment(frame, this);
         this.tetrisController = new TetrisController();
-        timer = new Timer(0, e -> update());
-        timer.setDelay(0);
-        timer.setRepeats(true);
+        gameLoopTimer = new Timer(0, e -> update());
+        gameLoopTimer.setDelay(0);
+        gameLoopTimer.setRepeats(true);
+        clearAnimationTimer = new Timer(0, e -> animateClear());
+        clearAnimationTimer.setDelay(SwingTetrisConstants.CLEAR_BLINK_INTERVAL);
+        clearAnimationTimer.setRepeats(true);
         init();
     }
 
@@ -127,17 +138,24 @@ public final class JTetrisGamePanel extends JLayeredPane {
     public void resume() {
         tetrisController.resume();
         frame.setContentPane(this);
-        timer.start();
+        gameLoopTimer.start();
     }
 
     private void update() {
+        clearData = tetrisController.collectClearData();
+        if (clearData != null) {
+            clearAnimationStarted = System.currentTimeMillis();
+            clearAnimationTimer.start();
+            gameLoopTimer.stop();
+            return;
+        }
         tetrisController.update();
         if (tetrisController.isPaused()) {
-            timer.stop();
+            gameLoopTimer.stop();
             frame.setContentPane(pauseMenuPanel);
         }
         if (tetrisController.isGameOver()) {
-            timer.stop();
+            gameLoopTimer.stop();
             gameOverFragment.setVisible(true);
         }
         render();
@@ -161,23 +179,36 @@ public final class JTetrisGamePanel extends JLayeredPane {
             tetrisSquares.get(index).setBackground(transparent);
         }
         final List<TetrisCell> ghostCells = tetrisController.getGhostCells();
-        renderCells(ghostCells, true);
+        renderCells(ghostCells, true, null);
         final List<TetrisCell> allSquares = tetrisController.getAlLCells();
-        renderCells(allSquares, false);
+        renderCells(allSquares, false, null);
         tetrisGrid.revalidate();
         tetrisGrid.repaint();
     }
 
-    private void renderCells(List<TetrisCell> cells, boolean ghost) {
+    private void renderCells(List<TetrisCell> cells, boolean ghost, Color color) {
         for (int index = 0; index < cells.size(); index++) {
             final TetrisCell tetrisCell = cells.get(index);
             if (tetrisCell != null) {
                 final int uiSquareIndex = tetrisGrid.getColCount() * tetrisCell.getY() + tetrisCell.getX();
                 if (uiSquareIndex >= 0 && uiSquareIndex < tetrisSquares.size()) {
-                    tetrisSquares.get(uiSquareIndex).setBackground(Color.decode(tetrisCell.getColorHex()));
+                    tetrisSquares.get(uiSquareIndex).setBackground(color == null ? Color.decode(tetrisCell.getColorHex()) : color);
                     tetrisSquares.get(uiSquareIndex).setGhostMode(ghost);
                 }
             }
         }
+    }
+
+    private void animateClear() {
+        if (clearData == null || System.currentTimeMillis() - clearAnimationStarted >= SwingTetrisConstants.CLEAR_BLINK_TOTAL) {
+            clearData = null;
+            clearAnimationTimer.stop();
+            gameLoopTimer.start();
+            return;
+        }
+        renderCells(clearData.getClearedTetrisCells(), false, clearInvisible ? transparent : SwingTetrisConstants.CLEAR_BLINK_COLOR);
+        clearInvisible = !clearInvisible;
+        tetrisGrid.revalidate();
+        tetrisGrid.repaint();
     }
 }
