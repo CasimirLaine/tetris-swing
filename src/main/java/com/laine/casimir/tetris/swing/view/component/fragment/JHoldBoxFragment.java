@@ -18,7 +18,7 @@ public final class JHoldBoxFragment extends JFragment {
 
     private void init() {
         add(new JTitleLabel(TetrisSwingStrings.TITLE_HOLD), BorderLayout.NORTH);
-        heldTetromino.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
+        heldTetromino.setBackground(SwingTetrisConstants.COLOR_BACKGROUND);
         add(heldTetromino, BorderLayout.CENTER);
     }
 

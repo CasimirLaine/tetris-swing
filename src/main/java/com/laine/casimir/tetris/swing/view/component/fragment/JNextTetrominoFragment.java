@@ -29,7 +29,7 @@ public final class JNextTetrominoFragment extends JFragment {
 
     public void addTetromino(BaseTetromino tetromino) {
         final JTetromino jTetromino = new JTetromino();
-        jTetromino.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
+        jTetromino.setBackground(SwingTetrisConstants.COLOR_BACKGROUND);
         jTetromino.setTetromino(tetromino);
         jTetromino.setCellSize(cellSize);
         tetrominoPanel.add(jTetromino);

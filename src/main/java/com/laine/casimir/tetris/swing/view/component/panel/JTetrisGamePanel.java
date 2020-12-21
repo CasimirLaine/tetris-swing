@@ -47,6 +47,8 @@ public final class JTetrisGamePanel extends JLayeredPane {
     private final JFrame frame;
     private final JPauseMenuPanel pauseMenuPanel;
 
+    private final JCountDownPanel countDownPanel = new JCountDownPanel(TetrisConstants.COUNT_DOWN);
+
     private final List<JMino> tetrisSquares = new ArrayList<>();
     private final JTetrisGrid tetrisGrid = new JTetrisGrid(TetrisConstants.WIDTH, TetrisConstants.VISIBLE_HEIGHT);
     private final JHoldBoxFragment holdBoxFragment = new JHoldBoxFragment();
@@ -111,14 +113,14 @@ public final class JTetrisGamePanel extends JLayeredPane {
                 nextTetrominoFragment.setPreferredSize(new Dimension(cellSize * 5, getHeight()));
             }
         });
-        tetrisGrid.setBackground(SwingTetrisConstants.BACKGROUND_COLOR);
-        tetrisGrid.setForeground(SwingTetrisConstants.GRID_COLOR);
+        tetrisGrid.setBackground(SwingTetrisConstants.COLOR_BACKGROUND);
+        tetrisGrid.setForeground(SwingTetrisConstants.COLOR_COLOR);
         tetrisGrid.setLayout(new TetrisGridLayout(tetrisGrid.getColCount(), tetrisGrid.getRowCount()));
         for (int y = 0; y < tetrisGrid.getRowCount(); y++) {
             for (int x = 0; x < tetrisGrid.getColCount(); x++) {
                 final JMino tetrisSquare = new JMino();
                 tetrisSquare.setBackground(new Color(0, 0, 0, 0));
-                tetrisSquare.setForeground(SwingTetrisConstants.BACKGROUND_COLOR);
+                tetrisSquare.setForeground(SwingTetrisConstants.COLOR_BACKGROUND);
                 tetrisGrid.add(tetrisSquare, new Point(x, y));
                 tetrisSquares.add(tetrisSquare);
             }
@@ -130,15 +132,20 @@ public final class JTetrisGamePanel extends JLayeredPane {
         panel.add(nextTetrominoFragment, BorderLayout.EAST);
         setLayout(new OverlayLayout(this));
         add(panel, Integer.valueOf(0));
-        add(gameOverFragment, Integer.valueOf(1));
+        add(countDownPanel, Integer.valueOf(1));
+        add(gameOverFragment, Integer.valueOf(2));
         tetrisController.start();
         resume();
     }
 
     public void resume() {
-        tetrisController.resume();
-        frame.setContentPane(this);
-        gameLoopTimer.start();
+        frame.setContentPane(JTetrisGamePanel.this);
+        countDownPanel.setVisible(true);
+        countDownPanel.start(() -> {
+            countDownPanel.setVisible(false);
+            tetrisController.resume();
+            gameLoopTimer.start();
+        });
     }
 
     private void update() {

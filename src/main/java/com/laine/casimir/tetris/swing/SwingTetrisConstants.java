@@ -19,8 +19,9 @@ public final class SwingTetrisConstants {
     public static final Color COLOR_PANEL_TEXT = Color.WHITE;
     public static final Color COLOR_FRAGMENT_BACKGROUND = COLOR_PANEL_BACKGROUND;
     public static final Color COLOR_FRAGMENT_TEXT = COLOR_PANEL_TEXT;
-    public static final Color BACKGROUND_COLOR = Color.BLACK;
-    public static final Color GRID_COLOR = Color.WHITE;
+    public static final Color COLOR_BACKGROUND = Color.BLACK;
+    public static final Color COLOR_COLOR = Color.WHITE;
+    public static final Color COLOR_COUNTDOWN = Color.WHITE;
     public static final int CLEAR_BLINK_INTERVAL = 100;
     public static final int CLEAR_BLINK_TOTAL = 500;
     public static final Color CLEAR_BLINK_COLOR = Color.WHITE;

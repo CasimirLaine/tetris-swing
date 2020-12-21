@@ -38,7 +38,7 @@ public final class JTetromino extends JPanel {
             final TetrisCell tetrisCell = tetrisCellList.get(index);
             final JMino jMino = new JMino();
             jMino.setBackground(Color.decode(tetrisCell.getColorHex()));
-            jMino.setForeground(SwingTetrisConstants.BACKGROUND_COLOR);
+            jMino.setForeground(SwingTetrisConstants.COLOR_BACKGROUND);
             add(jMino, new Point(tetrisCell.getX(), tetrisCell.getY()));
         }
         setFocusable(false);
