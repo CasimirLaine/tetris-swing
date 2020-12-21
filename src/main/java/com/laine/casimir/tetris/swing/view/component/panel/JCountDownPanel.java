@@ -27,10 +27,15 @@ public class JCountDownPanel extends JPanel {
             if (value > 0) {
                 value--;
             } else {
+                if (onReady != null) {
+                    onReady.run();
+                    onReady = null;
+                }
                 timer.stop();
             }
         }
     });
+    private Runnable onReady;
 
     public JCountDownPanel(int from) {
         this.from = from;
@@ -54,18 +59,13 @@ public class JCountDownPanel extends JPanel {
     }
 
     public void start(Runnable onReady) {
+        this.onReady = onReady;
         value = from;
-        timer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (value <= 0) {
-                    timer.removeActionListener(this);
-                    if (onReady != null) {
-                        onReady.run();
-                    }
-                }
-            }
-        });
         timer.restart();
+    }
+
+    public void stop() {
+        this.onReady = null;
+        timer.stop();
     }
 }

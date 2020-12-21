@@ -1,6 +1,7 @@
 package com.laine.casimir.tetris.swing.control;
 
 import com.laine.casimir.tetris.base.api.TetrisController;
+import com.laine.casimir.tetris.swing.view.component.panel.JTetrisGamePanel;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
@@ -12,7 +13,14 @@ public final class SwingKeyControls implements KeyEventDispatcher {
     private static final long EVENT_INTERVAL = 25;
 
     private final Map<Integer, Long> keysHeld = new HashMap<>();
+
+    private final JTetrisGamePanel tetrisGamePanel;
+
     private TetrisController tetrisController;
+
+    public SwingKeyControls(JTetrisGamePanel tetrisGamePanel) {
+        this.tetrisGamePanel = tetrisGamePanel;
+    }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
@@ -34,7 +42,7 @@ public final class SwingKeyControls implements KeyEventDispatcher {
                 if (lastEventTime != null) {
                     return false;
                 }
-                tetrisController.pause();
+                tetrisGamePanel.pause();
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_NUMPAD4:

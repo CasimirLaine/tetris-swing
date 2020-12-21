@@ -39,7 +39,7 @@ public final class JTetrisGamePanel extends JLayeredPane {
     private final Color transparent = new Color(0, 0, 0, 0);
     private final SwingTetrisSettings settings = new SwingTetrisSettings();
 
-    private final SwingKeyControls gameControls = new SwingKeyControls();
+    private final SwingKeyControls gameControls = new SwingKeyControls(this);
     private final Timer gameLoopTimer;
 
     private final Timer clearAnimationTimer;
@@ -138,6 +138,14 @@ public final class JTetrisGamePanel extends JLayeredPane {
         resume();
     }
 
+    public void pause() {
+        countDownPanel.stop();
+        countDownPanel.setVisible(false);
+        gameLoopTimer.stop();
+        frame.setContentPane(pauseMenuPanel);
+        tetrisController.pause();
+    }
+
     public void resume() {
         frame.setContentPane(JTetrisGamePanel.this);
         countDownPanel.setVisible(true);
@@ -158,6 +166,7 @@ public final class JTetrisGamePanel extends JLayeredPane {
         }
         tetrisController.update();
         if (tetrisController.isPaused()) {
+            countDownPanel.stop();
             gameLoopTimer.stop();
             frame.setContentPane(pauseMenuPanel);
         }
