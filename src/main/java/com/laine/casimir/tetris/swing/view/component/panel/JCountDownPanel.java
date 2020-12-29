@@ -11,7 +11,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JCountDownPanel extends JPanel {
+public final class JCountDownPanel extends JPanel {
 
     private static final float FONT_SIZE = 64F;
 

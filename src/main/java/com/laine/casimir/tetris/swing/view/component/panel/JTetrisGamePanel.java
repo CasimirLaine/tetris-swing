@@ -10,7 +10,6 @@ import com.laine.casimir.tetris.swing.SwingTetrisSettings;
 import com.laine.casimir.tetris.swing.control.SwingKeyControls;
 import com.laine.casimir.tetris.swing.view.component.JMino;
 import com.laine.casimir.tetris.swing.view.component.JTetrisGrid;
-import com.laine.casimir.tetris.swing.view.component.fragment.GameOverFragment;
 import com.laine.casimir.tetris.swing.view.component.fragment.JHoldBoxFragment;
 import com.laine.casimir.tetris.swing.view.component.fragment.JInfoFragment;
 import com.laine.casimir.tetris.swing.view.component.fragment.JNextTetrominoFragment;
@@ -49,7 +48,7 @@ public final class JTetrisGamePanel extends JLayeredPane {
 
     private final JCountDownPanel countDownPanel = new JCountDownPanel(TetrisConstants.COUNT_DOWN);
 
-    private final List<JMino> tetrisSquares = new ArrayList<>();
+    private final List<JMino> minos = new ArrayList<>();
     private final JTetrisGrid tetrisGrid = new JTetrisGrid(TetrisConstants.WIDTH, TetrisConstants.VISIBLE_HEIGHT);
     private final JHoldBoxFragment holdBoxFragment = new JHoldBoxFragment();
     private final JNextTetrominoFragment nextTetrominoFragment = new JNextTetrominoFragment();
@@ -113,16 +112,16 @@ public final class JTetrisGamePanel extends JLayeredPane {
                 nextTetrominoFragment.setPreferredSize(new Dimension(cellSize * 5, getHeight()));
             }
         });
-        tetrisGrid.setBackground(SwingTetrisConstants.COLOR_BACKGROUND);
-        tetrisGrid.setForeground(SwingTetrisConstants.COLOR_COLOR);
+        tetrisGrid.setBackground(SwingTetrisConstants.COLOR_GRID_BACKGROUND);
+        tetrisGrid.setForeground(SwingTetrisConstants.COLOR_GRID_FOREGROUND);
         tetrisGrid.setLayout(new TetrisGridLayout(tetrisGrid.getColCount(), tetrisGrid.getRowCount()));
         for (int y = 0; y < tetrisGrid.getRowCount(); y++) {
             for (int x = 0; x < tetrisGrid.getColCount(); x++) {
-                final JMino tetrisSquare = new JMino();
-                tetrisSquare.setBackground(new Color(0, 0, 0, 0));
-                tetrisSquare.setForeground(SwingTetrisConstants.COLOR_BACKGROUND);
-                tetrisGrid.add(tetrisSquare, new Point(x, y));
-                tetrisSquares.add(tetrisSquare);
+                final JMino mino = new JMino();
+                mino.setBackground(transparent);
+                mino.setForeground(SwingTetrisConstants.COLOR_TETROMINO_BORDER);
+                tetrisGrid.add(mino, new Point(x, y));
+                minos.add(mino);
             }
         }
         final JPanel panel = new JPanel();
@@ -139,11 +138,13 @@ public final class JTetrisGamePanel extends JLayeredPane {
     }
 
     public void pause() {
-        countDownPanel.stop();
-        countDownPanel.setVisible(false);
-        gameLoopTimer.stop();
-        frame.setContentPane(pauseMenuPanel);
-        tetrisController.pause();
+        if (!tetrisController.isGameOver()) {
+            countDownPanel.stop();
+            countDownPanel.setVisible(false);
+            gameLoopTimer.stop();
+            frame.setContentPane(pauseMenuPanel);
+            tetrisController.pause();
+        }
     }
 
     public void resume() {
@@ -191,13 +192,13 @@ public final class JTetrisGamePanel extends JLayeredPane {
     }
 
     private void renderGrid() {
-        for (int index = 0; index < tetrisSquares.size(); index++) {
-            tetrisSquares.get(index).setBackground(transparent);
+        for (int index = 0; index < minos.size(); index++) {
+            minos.get(index).setBackground(transparent);
         }
         final List<TetrisCell> ghostCells = tetrisController.getGhostCells();
         renderCells(ghostCells, true, null);
-        final List<TetrisCell> allSquares = tetrisController.getAlLCells();
-        renderCells(allSquares, false, null);
+        final List<TetrisCell> alLCells = tetrisController.getAlLCells();
+        renderCells(alLCells, false, null);
         tetrisGrid.revalidate();
         tetrisGrid.repaint();
     }
@@ -206,10 +207,10 @@ public final class JTetrisGamePanel extends JLayeredPane {
         for (int index = 0; index < cells.size(); index++) {
             final TetrisCell tetrisCell = cells.get(index);
             if (tetrisCell != null) {
-                final int uiSquareIndex = tetrisGrid.getColCount() * tetrisCell.getY() + tetrisCell.getX();
-                if (uiSquareIndex >= 0 && uiSquareIndex < tetrisSquares.size()) {
-                    tetrisSquares.get(uiSquareIndex).setBackground(color == null ? Color.decode(tetrisCell.getColorHex()) : color);
-                    tetrisSquares.get(uiSquareIndex).setGhostMode(ghost);
+                final int uiMinoIndex = tetrisGrid.getColCount() * tetrisCell.getY() + tetrisCell.getX();
+                if (uiMinoIndex >= 0 && uiMinoIndex < minos.size()) {
+                    minos.get(uiMinoIndex).setBackground(color == null ? Color.decode(tetrisCell.getColorHex()) : color);
+                    minos.get(uiMinoIndex).setGhostMode(ghost);
                 }
             }
         }

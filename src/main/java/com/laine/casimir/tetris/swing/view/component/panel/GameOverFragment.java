@@ -1,15 +1,15 @@
-package com.laine.casimir.tetris.swing.view.component.fragment;
+package com.laine.casimir.tetris.swing.view.component.panel;
 
+import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
-import com.laine.casimir.tetris.swing.view.component.panel.JMainMenuPanel;
-import com.laine.casimir.tetris.swing.view.component.panel.JTetrisGamePanel;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
+import java.awt.Dimension;
 
-public class GameOverFragment extends JFragment {
+public final class GameOverFragment extends JMenuPanel {
 
     private final JFrame frame;
     private final JTetrisGamePanel tetrisGamePanel;
@@ -24,7 +24,10 @@ public class GameOverFragment extends JFragment {
     private void init() {
         setVisible(false);
         quitButton.addActionListener(e -> frame.setContentPane(new JMainMenuPanel(frame)));
-        add(new JTitleLabel(TetrisSwingStrings.TITLE_GAME_OVER), BorderLayout.NORTH);
-        add(quitButton, BorderLayout.CENTER);
+        quitButton.setAlignmentX(CENTER_ALIGNMENT);
+        quitButton.setMaximumSize(new Dimension(SwingTetrisConstants.BUTTON_WIDTH, SwingTetrisConstants.BUTTON_HEIGHT));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(new JTitleLabel(TetrisSwingStrings.TITLE_GAME_OVER));
+        add(quitButton);
     }
 }

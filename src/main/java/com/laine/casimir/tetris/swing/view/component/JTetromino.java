@@ -7,7 +7,6 @@ import com.laine.casimir.tetris.swing.view.layout.TetrisGridLayout;
 
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Point;
 import java.util.List;
 
@@ -16,14 +15,6 @@ public final class JTetromino extends JPanel {
     private TetrisGridLayout layout;
 
     private int cellSize;
-
-    @Override
-    public void setBackground(Color bg) {
-        super.setBackground(bg);
-        for (Component component : getComponents()) {
-            component.setBackground(bg);
-        }
-    }
 
     public void setTetromino(BaseTetromino tetromino) {
         layout = null;
@@ -38,7 +29,7 @@ public final class JTetromino extends JPanel {
             final TetrisCell tetrisCell = tetrisCellList.get(index);
             final JMino jMino = new JMino();
             jMino.setBackground(Color.decode(tetrisCell.getColorHex()));
-            jMino.setForeground(SwingTetrisConstants.COLOR_BACKGROUND);
+            jMino.setForeground(SwingTetrisConstants.COLOR_TETROMINO_BORDER);
             add(jMino, new Point(tetrisCell.getX(), tetrisCell.getY()));
         }
         setFocusable(false);

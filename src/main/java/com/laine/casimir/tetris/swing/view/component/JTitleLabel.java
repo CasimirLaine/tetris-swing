@@ -18,6 +18,7 @@ public final class JTitleLabel extends JLabel {
                 BorderFactory.createEmptyBorder(SwingTetrisConstants.PADDING_FRAGMENT_TITLE, SwingTetrisConstants.PADDING_FRAGMENT_TITLE,
                         SwingTetrisConstants.PADDING_FRAGMENT_TITLE, SwingTetrisConstants.PADDING_FRAGMENT_TITLE));
         setHorizontalAlignment(SwingConstants.CENTER);
+        setAlignmentX(CENTER_ALIGNMENT);
         setForeground(SwingTetrisConstants.COLOR_FRAGMENT_TEXT);
     }
 }

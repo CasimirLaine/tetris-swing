@@ -22,6 +22,7 @@ public final class JNextTetrominoFragment extends JFragment {
     }
 
     private void init() {
+        tetrominoPanel.setBackground(SwingTetrisConstants.COLOR_FRAGMENT_CONTENT_BACKGROUND);
         tetrominoPanel.setLayout(new BoxLayout(tetrominoPanel, BoxLayout.Y_AXIS));
         add(new JTitleLabel(TetrisSwingStrings.TITLE_NEXT), BorderLayout.NORTH);
         add(tetrominoPanel, BorderLayout.CENTER);
@@ -29,7 +30,7 @@ public final class JNextTetrominoFragment extends JFragment {
 
     public void addTetromino(BaseTetromino tetromino) {
         final JTetromino jTetromino = new JTetromino();
-        jTetromino.setBackground(SwingTetrisConstants.COLOR_BACKGROUND);
+        jTetromino.setBackground(SwingTetrisConstants.COLOR_FRAGMENT_CONTENT_BACKGROUND);
         jTetromino.setTetromino(tetromino);
         jTetromino.setCellSize(cellSize);
         tetrominoPanel.add(jTetromino);

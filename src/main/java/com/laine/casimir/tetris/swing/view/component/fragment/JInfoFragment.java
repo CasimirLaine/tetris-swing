@@ -1,5 +1,6 @@
 package com.laine.casimir.tetris.swing.view.component.fragment;
 
+import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
 
@@ -8,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 
 public final class JInfoFragment extends JFragment {
@@ -62,8 +62,8 @@ public final class JInfoFragment extends JFragment {
     private void configureTextField(JTextField textField) {
         textField.setEnabled(false);
         textField.setHorizontalAlignment(SwingConstants.CENTER);
-        textField.setBackground(Color.BLACK);
-        textField.setForeground(Color.WHITE);
+        textField.setBackground(SwingTetrisConstants.COLOR_FRAGMENT_CONTENT_BACKGROUND);
+        textField.setForeground(SwingTetrisConstants.COLOR_FRAGMENT_TEXT);
         Font scoreFont = textField.getFont();
         scoreFont = scoreFont.deriveFont(FONT_SIZE_TEXT_FIELD);
         textField.setFont(scoreFont);
