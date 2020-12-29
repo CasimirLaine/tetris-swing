@@ -7,7 +7,7 @@ public final class TetrisSwingStrings {
     public static final String MAIN_MENU_QUIT = "QUIT";
     public static final String TITLE_HOLD = "HOLD";
     public static final String TITLE_NEXT = "NEXT";
-    public static final String TITLE_INFO = "INFO";
+    public static final String TITLE_INFO = "";
     public static final String TITLE_SCORE = "SCORE";
     public static final String TITLE_LEVEL = "LEVEL";
     public static final String TITLE_LINES = "LINES";
