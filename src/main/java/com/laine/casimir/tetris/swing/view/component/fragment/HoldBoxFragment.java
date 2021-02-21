@@ -3,21 +3,21 @@ package com.laine.casimir.tetris.swing.view.component.fragment;
 import com.laine.casimir.tetris.base.api.model.BaseTetromino;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
-import com.laine.casimir.tetris.swing.view.component.JTetromino;
-import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
+import com.laine.casimir.tetris.swing.view.component.TetrominoView;
+import com.laine.casimir.tetris.swing.view.component.TitleLabel;
 
 import java.awt.BorderLayout;
 
-public final class JHoldBoxFragment extends JFragment {
+public final class HoldBoxFragment extends Fragment {
 
-    private final JTetromino heldTetromino = new JTetromino();
+    private final TetrominoView heldTetromino = new TetrominoView();
 
-    public JHoldBoxFragment() {
+    public HoldBoxFragment() {
         init();
     }
 
     private void init() {
-        add(new JTitleLabel(TetrisSwingStrings.TITLE_HOLD), BorderLayout.NORTH);
+        add(new TitleLabel(TetrisSwingStrings.TITLE_HOLD), BorderLayout.NORTH);
         heldTetromino.setBackground(SwingTetrisConstants.COLOR_FRAGMENT_CONTENT_BACKGROUND);
         add(heldTetromino, BorderLayout.CENTER);
     }

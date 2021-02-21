@@ -2,7 +2,7 @@ package com.laine.casimir.tetris.swing.view.component.fragment;
 
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
-import com.laine.casimir.tetris.swing.view.component.JTitleLabel;
+import com.laine.casimir.tetris.swing.view.component.TitleLabel;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -11,7 +11,7 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.Font;
 
-public final class JInfoFragment extends JFragment {
+public final class InfoFragment extends Fragment {
 
     private static final float FONT_SIZE_TEXT_FIELD = 42F;
 
@@ -19,7 +19,7 @@ public final class JInfoFragment extends JFragment {
     private final JTextField levelText = new JTextField("-");
     private final JTextField linesText = new JTextField("-");
 
-    public JInfoFragment() {
+    public InfoFragment() {
         init();
     }
 
@@ -28,10 +28,10 @@ public final class JInfoFragment extends JFragment {
         configureTextField(scoreText);
         configureTextField(levelText);
         configureTextField(linesText);
-        final JTitleLabel scoreLabel = new JTitleLabel(TetrisSwingStrings.TITLE_SCORE);
-        final JTitleLabel levelLabel = new JTitleLabel(TetrisSwingStrings.TITLE_LEVEL);
-        final JTitleLabel linesLabel = new JTitleLabel(TetrisSwingStrings.TITLE_LINES);
-        add(new JTitleLabel(TetrisSwingStrings.TITLE_INFO), BorderLayout.NORTH);
+        final TitleLabel scoreLabel = new TitleLabel(TetrisSwingStrings.TITLE_SCORE);
+        final TitleLabel levelLabel = new TitleLabel(TetrisSwingStrings.TITLE_LEVEL);
+        final TitleLabel linesLabel = new TitleLabel(TetrisSwingStrings.TITLE_LINES);
+        add(new TitleLabel(TetrisSwingStrings.TITLE_INFO), BorderLayout.NORTH);
         final JPanel textPanel = new JPanel();
         textPanel.setOpaque(false);
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));

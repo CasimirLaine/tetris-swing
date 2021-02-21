@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.List;
 
-public final class JTetromino extends JPanel {
+public final class TetrominoView extends JPanel {
 
     private TetrisGridLayout layout;
 
@@ -27,10 +27,10 @@ public final class JTetromino extends JPanel {
         final List<TetrisCell> tetrisCellList = tetromino.getTetrisCells();
         for (int index = 0; index < tetrisCellList.size(); index++) {
             final TetrisCell tetrisCell = tetrisCellList.get(index);
-            final JMino jMino = new JMino();
-            jMino.setBackground(Color.decode(tetrisCell.getColorHex()));
-            jMino.setForeground(SwingTetrisConstants.COLOR_TETROMINO_BORDER);
-            add(jMino, new Point(tetrisCell.getX(), tetrisCell.getY()));
+            final MinoView minoView = new MinoView();
+            minoView.setBackground(Color.decode(tetrisCell.getColorHex()));
+            minoView.setForeground(SwingTetrisConstants.COLOR_TETROMINO_BORDER);
+            add(minoView, new Point(tetrisCell.getX(), tetrisCell.getY()));
         }
         setFocusable(false);
     }

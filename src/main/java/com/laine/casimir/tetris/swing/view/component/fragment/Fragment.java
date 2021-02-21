@@ -6,9 +6,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
-class JFragment extends JPanel {
+class Fragment extends JPanel {
 
-    public JFragment() {
+    public Fragment() {
         init();
     }
 

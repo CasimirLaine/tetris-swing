@@ -1,8 +1,8 @@
 package com.laine.casimir.tetris.swing.view;
 
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
-import com.laine.casimir.tetris.swing.view.component.JTetrisFrame;
-import com.laine.casimir.tetris.swing.view.component.panel.JMainMenuPanel;
+import com.laine.casimir.tetris.swing.view.component.TetrisFrame;
+import com.laine.casimir.tetris.swing.view.component.panel.MainMenuPanel;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -11,7 +11,7 @@ import java.awt.Toolkit;
 
 public final class SwingManager {
 
-    private final JFrame frame = new JTetrisFrame(SwingTetrisConstants.APP_NAME);
+    private final JFrame frame = new TetrisFrame(SwingTetrisConstants.APP_NAME);
 
     public SwingManager() {
         init();
@@ -26,7 +26,7 @@ public final class SwingManager {
                 Math.min(SwingTetrisConstants.WINDOW_DEFAULT_HEIGHT, screenHeight)));
         frame.setMinimumSize(new Dimension(Math.min(SwingTetrisConstants.WINDOW_MIN_WIDTH, screenWidth),
                 Math.min(SwingTetrisConstants.WINDOW_MIN_HEIGHT, screenHeight)));
-        frame.setContentPane(new JMainMenuPanel(frame));
+        frame.setContentPane(new MainMenuPanel(frame));
         frame.pack();
         frame.setVisible(true);
     }

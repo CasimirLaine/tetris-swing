@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Stroke;
 
-public final class JMino extends AbstractTetrisComponent {
+public final class MinoView extends AbstractTetrisComponent {
 
     private static final int STROKE_WIDTH = 1;
     private static final int STROKE_WIDTH_GHOST = 5;
@@ -18,7 +18,7 @@ public final class JMino extends AbstractTetrisComponent {
 
     private boolean ghostMode;
 
-    public JMino() {
+    public MinoView() {
         init();
     }
 

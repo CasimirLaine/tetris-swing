@@ -11,7 +11,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public final class JCountDownPanel extends JPanel {
+public final class CountDownPanel extends JPanel {
 
     private static final float FONT_SIZE = 64F;
 
@@ -37,7 +37,7 @@ public final class JCountDownPanel extends JPanel {
     });
     private Runnable onReady;
 
-    public JCountDownPanel(int from) {
+    public CountDownPanel(int from) {
         this.from = from;
         init();
     }

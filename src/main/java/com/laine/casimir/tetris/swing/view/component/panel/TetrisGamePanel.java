@@ -8,11 +8,11 @@ import com.laine.casimir.tetris.base.api.model.TetrisCell;
 import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.SwingTetrisSettings;
 import com.laine.casimir.tetris.swing.control.SwingKeyControls;
-import com.laine.casimir.tetris.swing.view.component.JMino;
-import com.laine.casimir.tetris.swing.view.component.JTetrisGrid;
-import com.laine.casimir.tetris.swing.view.component.fragment.JHoldBoxFragment;
-import com.laine.casimir.tetris.swing.view.component.fragment.JInfoFragment;
-import com.laine.casimir.tetris.swing.view.component.fragment.JNextTetrominoFragment;
+import com.laine.casimir.tetris.swing.view.component.MinoView;
+import com.laine.casimir.tetris.swing.view.component.TetrisGrid;
+import com.laine.casimir.tetris.swing.view.component.fragment.HoldBoxFragment;
+import com.laine.casimir.tetris.swing.view.component.fragment.InfoFragment;
+import com.laine.casimir.tetris.swing.view.component.fragment.NextTetrominoFragment;
 import com.laine.casimir.tetris.swing.view.layout.TetrisGridLayout;
 
 import javax.swing.BoxLayout;
@@ -33,7 +33,7 @@ import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class JTetrisGamePanel extends JLayeredPane {
+public final class TetrisGamePanel extends JLayeredPane {
 
     private final Color transparent = new Color(0, 0, 0, 0);
     private final SwingTetrisSettings settings = new SwingTetrisSettings();
@@ -44,16 +44,16 @@ public final class JTetrisGamePanel extends JLayeredPane {
     private final Timer clearAnimationTimer;
 
     private final JFrame frame;
-    private final JPauseMenuPanel pauseMenuPanel;
+    private final PauseMenuPanel pauseMenuPanel;
 
-    private final JCountDownPanel countDownPanel = new JCountDownPanel(TetrisConstants.COUNT_DOWN);
+    private final CountDownPanel countDownPanel = new CountDownPanel(TetrisConstants.COUNT_DOWN);
 
-    private final List<JMino> minos = new ArrayList<>();
-    private final JTetrisGrid tetrisGrid = new JTetrisGrid(TetrisConstants.WIDTH, TetrisConstants.VISIBLE_HEIGHT);
-    private final JHoldBoxFragment holdBoxFragment = new JHoldBoxFragment();
-    private final JNextTetrominoFragment nextTetrominoFragment = new JNextTetrominoFragment();
-    private final JInfoFragment infoFragment = new JInfoFragment();
-    private final GameOverFragment gameOverFragment;
+    private final List<MinoView> minoViews = new ArrayList<>();
+    private final TetrisGrid tetrisGrid = new TetrisGrid(TetrisConstants.WIDTH, TetrisConstants.VISIBLE_HEIGHT);
+    private final HoldBoxFragment holdBoxFragment = new HoldBoxFragment();
+    private final NextTetrominoFragment nextTetrominoFragment = new NextTetrominoFragment();
+    private final InfoFragment infoFragment = new InfoFragment();
+    private final GameOverPanel gameOverPanel;
 
     private final TetrisController tetrisController;
 
@@ -62,10 +62,10 @@ public final class JTetrisGamePanel extends JLayeredPane {
     private long clearAnimationStarted;
     private boolean clearInvisible;
 
-    public JTetrisGamePanel(JFrame frame) {
+    public TetrisGamePanel(JFrame frame) {
         this.frame = frame;
-        this.pauseMenuPanel = new JPauseMenuPanel(frame, this);
-        this.gameOverFragment = new GameOverFragment(frame, this);
+        this.pauseMenuPanel = new PauseMenuPanel(frame, this);
+        this.gameOverPanel = new GameOverPanel(frame, this);
         this.tetrisController = new TetrisController();
         gameLoopTimer = new Timer(0, e -> update());
         gameLoopTimer.setDelay(0);
@@ -80,7 +80,7 @@ public final class JTetrisGamePanel extends JLayeredPane {
         addAncestorListener(new AncestorListener() {
             @Override
             public void ancestorAdded(AncestorEvent event) {
-                if (event.getAncestor() == JTetrisGamePanel.this) {
+                if (event.getAncestor() == TetrisGamePanel.this) {
                     gameControls.setTetrisController(tetrisController);
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(gameControls);
                 }
@@ -88,7 +88,7 @@ public final class JTetrisGamePanel extends JLayeredPane {
 
             @Override
             public void ancestorRemoved(AncestorEvent event) {
-                if (event.getAncestor() == JTetrisGamePanel.this) {
+                if (event.getAncestor() == TetrisGamePanel.this) {
                     gameControls.setTetrisController(null);
                     KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(gameControls);
                 }
@@ -117,11 +117,11 @@ public final class JTetrisGamePanel extends JLayeredPane {
         tetrisGrid.setLayout(new TetrisGridLayout(tetrisGrid.getColCount(), tetrisGrid.getRowCount()));
         for (int y = 0; y < tetrisGrid.getRowCount(); y++) {
             for (int x = 0; x < tetrisGrid.getColCount(); x++) {
-                final JMino mino = new JMino();
-                mino.setBackground(transparent);
-                mino.setForeground(SwingTetrisConstants.COLOR_TETROMINO_BORDER);
-                tetrisGrid.add(mino, new Point(x, y));
-                minos.add(mino);
+                final MinoView minoView = new MinoView();
+                minoView.setBackground(transparent);
+                minoView.setForeground(SwingTetrisConstants.COLOR_TETROMINO_BORDER);
+                tetrisGrid.add(minoView, new Point(x, y));
+                minoViews.add(minoView);
             }
         }
         final JPanel panel = new JPanel();
@@ -132,7 +132,7 @@ public final class JTetrisGamePanel extends JLayeredPane {
         setLayout(new OverlayLayout(this));
         add(panel, Integer.valueOf(0));
         add(countDownPanel, Integer.valueOf(1));
-        add(gameOverFragment, Integer.valueOf(2));
+        add(gameOverPanel, Integer.valueOf(2));
         tetrisController.start();
         resume();
     }
@@ -148,7 +148,7 @@ public final class JTetrisGamePanel extends JLayeredPane {
     }
 
     public void resume() {
-        frame.setContentPane(JTetrisGamePanel.this);
+        frame.setContentPane(TetrisGamePanel.this);
         countDownPanel.setVisible(true);
         countDownPanel.start(() -> {
             countDownPanel.setVisible(false);
@@ -173,7 +173,7 @@ public final class JTetrisGamePanel extends JLayeredPane {
         }
         if (tetrisController.isGameOver()) {
             gameLoopTimer.stop();
-            gameOverFragment.setVisible(true);
+            gameOverPanel.setVisible(true);
         }
         render();
     }
@@ -192,8 +192,8 @@ public final class JTetrisGamePanel extends JLayeredPane {
     }
 
     private void renderGrid() {
-        for (int index = 0; index < minos.size(); index++) {
-            minos.get(index).setBackground(transparent);
+        for (int index = 0; index < minoViews.size(); index++) {
+            minoViews.get(index).setBackground(transparent);
         }
         final List<TetrisCell> ghostCells = tetrisController.getGhostCells();
         renderCells(ghostCells, true, null);
@@ -208,9 +208,9 @@ public final class JTetrisGamePanel extends JLayeredPane {
             final TetrisCell tetrisCell = cells.get(index);
             if (tetrisCell != null) {
                 final int uiMinoIndex = tetrisGrid.getColCount() * tetrisCell.getY() + tetrisCell.getX();
-                if (uiMinoIndex >= 0 && uiMinoIndex < minos.size()) {
-                    minos.get(uiMinoIndex).setBackground(color == null ? Color.decode(tetrisCell.getColorHex()) : color);
-                    minos.get(uiMinoIndex).setGhostMode(ghost);
+                if (uiMinoIndex >= 0 && uiMinoIndex < minoViews.size()) {
+                    minoViews.get(uiMinoIndex).setBackground(color == null ? Color.decode(tetrisCell.getColorHex()) : color);
+                    minoViews.get(uiMinoIndex).setGhostMode(ghost);
                 }
             }
         }

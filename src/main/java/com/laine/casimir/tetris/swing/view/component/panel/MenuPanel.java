@@ -8,11 +8,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 
-class JMenuPanel extends JPanel {
+class MenuPanel extends JPanel {
 
     private final JLabel titleLabel = new JLabel();
 
-    public JMenuPanel() {
+    public MenuPanel() {
         init();
     }
 

@@ -6,9 +6,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public final class JTitleLabel extends JLabel {
+public final class TitleLabel extends JLabel {
 
-    public JTitleLabel(String text) {
+    public TitleLabel(String text) {
         super(text);
         init();
     }

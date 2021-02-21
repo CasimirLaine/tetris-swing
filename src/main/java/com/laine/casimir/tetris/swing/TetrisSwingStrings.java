@@ -4,6 +4,7 @@ public final class TetrisSwingStrings {
 
     public static final String MAIN_MENU_TITLE = SwingTetrisConstants.APP_NAME;
     public static final String MAIN_MENU_PLAY = "PLAY";
+    public static final String MAIN_MENU_CONTROLS = "CONTROLS";
     public static final String MAIN_MENU_QUIT = "QUIT";
     public static final String TITLE_HOLD = "HOLD";
     public static final String TITLE_NEXT = "NEXT";
@@ -14,7 +15,9 @@ public final class TetrisSwingStrings {
     public static final String TITLE_GAME_OVER = "GAME OVER";
     public static final String PAUSE_MENU_TITLE = "PAUSED";
     public static final String PAUSE_MENU_RESUME = "RESUME";
+    public static final String PAUSE_MENU_CONTROLS = "CONTROLS";
     public static final String PAUSE_MENU_QUIT = "QUIT";
+    public static final String BACK = "BACK";
 
     private TetrisSwingStrings() {}
 }

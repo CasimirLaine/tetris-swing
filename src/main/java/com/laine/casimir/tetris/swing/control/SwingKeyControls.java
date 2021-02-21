@@ -1,7 +1,7 @@
 package com.laine.casimir.tetris.swing.control;
 
 import com.laine.casimir.tetris.base.api.TetrisController;
-import com.laine.casimir.tetris.swing.view.component.panel.JTetrisGamePanel;
+import com.laine.casimir.tetris.swing.view.component.panel.TetrisGamePanel;
 
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
@@ -14,11 +14,11 @@ public final class SwingKeyControls implements KeyEventDispatcher {
 
     private final Map<Integer, Long> keysHeld = new HashMap<>();
 
-    private final JTetrisGamePanel tetrisGamePanel;
+    private final TetrisGamePanel tetrisGamePanel;
 
     private TetrisController tetrisController;
 
-    public SwingKeyControls(JTetrisGamePanel tetrisGamePanel) {
+    public SwingKeyControls(TetrisGamePanel tetrisGamePanel) {
         this.tetrisGamePanel = tetrisGamePanel;
     }
 

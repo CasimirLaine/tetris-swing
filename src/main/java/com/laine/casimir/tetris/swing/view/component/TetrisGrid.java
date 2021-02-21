@@ -4,7 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 
-public final class JTetrisGrid extends AbstractTetrisComponent {
+public final class TetrisGrid extends AbstractTetrisComponent {
 
     private static final int LINE_WIDTH = 1;
 
@@ -13,7 +13,7 @@ public final class JTetrisGrid extends AbstractTetrisComponent {
     private final int colCount;
     private final int rowCount;
 
-    public JTetrisGrid(int colCount, int rowCount) {
+    public TetrisGrid(int colCount, int rowCount) {
         this.colCount = colCount;
         this.rowCount = rowCount;
     }

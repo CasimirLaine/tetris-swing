@@ -3,9 +3,9 @@ package com.laine.casimir.tetris.swing.view.component;
 import javax.swing.JFrame;
 import java.awt.Container;
 
-public final class JTetrisFrame extends JFrame {
+public final class TetrisFrame extends JFrame {
 
-    public JTetrisFrame(String title) {
+    public TetrisFrame(String title) {
         super(title);
     }
 
