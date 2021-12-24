@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="main" type="Application" factoryName="Application">
+  <configuration default="false" name="Tetris Swing" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.laine.casimir.tetris.swing.Main" />
     <module name="Tetris_Swing.main" />
     <method v="2">

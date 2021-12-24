@@ -1,5 +1,13 @@
 plugins {
     id 'java'
+    id 'jacoco'
+}
+
+sourceSets {
+    main {
+    }
+    test {
+    }
 }
 
 group 'com.laine.casimir.tetris.swing'
@@ -11,5 +19,26 @@ repositories {
 
 dependencies {
     implementation project(':tetris-base')
+}
 
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    testLogging.showStandardStreams = true
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacoco/html')
+    }
+}
+jacoco {
+    toolVersion = "0.8.7"
+    reportsDirectory = layout.buildDirectory.dir('jacoco')
 }
