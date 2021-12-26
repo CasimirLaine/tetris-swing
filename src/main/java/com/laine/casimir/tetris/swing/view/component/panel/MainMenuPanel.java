@@ -1,14 +1,9 @@
 package com.laine.casimir.tetris.swing.view.component.panel;
 
-import com.laine.casimir.tetris.swing.SwingTetrisConstants;
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 public final class MainMenuPanel extends MenuPanel {
 
@@ -28,18 +23,6 @@ public final class MainMenuPanel extends MenuPanel {
         playButton.addActionListener(e -> frame.setContentPane(new TetrisGamePanel(frame)));
         controlsButton.addActionListener(e -> frame.setContentPane(new ControlsPanel(frame, this)));
         quitButton.addActionListener(e -> frame.dispose());
-        playButton.setAlignmentX(CENTER_ALIGNMENT);
-        controlsButton.setAlignmentX(CENTER_ALIGNMENT);
-        quitButton.setAlignmentX(CENTER_ALIGNMENT);
-        playButton.setMaximumSize(new Dimension(SwingTetrisConstants.BUTTON_WIDTH, SwingTetrisConstants.BUTTON_HEIGHT));
-        controlsButton.setMaximumSize(new Dimension(SwingTetrisConstants.BUTTON_WIDTH, SwingTetrisConstants.BUTTON_HEIGHT));
-        quitButton.setMaximumSize(new Dimension(SwingTetrisConstants.BUTTON_WIDTH, SwingTetrisConstants.BUTTON_HEIGHT));
-        final JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setBackground(SwingTetrisConstants.COLOR_PANEL_BACKGROUND);
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
-        buttonsPanel.add(playButton);
-        buttonsPanel.add(controlsButton);
-        buttonsPanel.add(quitButton);
-        add(buttonsPanel, BorderLayout.CENTER);
+        addButtons(playButton, controlsButton, quitButton);
     }
 }
