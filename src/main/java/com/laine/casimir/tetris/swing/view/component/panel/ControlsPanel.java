@@ -56,7 +56,7 @@ public class ControlsPanel extends JPanel {
                     stringBuilder.append(", ");
                 }
             }
-            final String text = String.format("%s: %s", control.description, stringBuilder.toString());
+            final String text = String.format("%s: %s", control.description, stringBuilder);
             final JLabel label = new JLabel(text);
             label.setBorder(
                     BorderFactory.createEmptyBorder(SwingTetrisConstants.PADDING_PANEL_TITLE, SwingTetrisConstants.PADDING_PANEL_TITLE,

@@ -1,7 +1,6 @@
 package com.laine.casimir.tetris.swing.view.component.panel;
 
 import com.laine.casimir.tetris.swing.TetrisSwingStrings;
-import com.laine.casimir.tetris.swing.view.component.TitleLabel;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -20,7 +19,7 @@ public final class GameOverPanel extends MenuPanel {
     }
 
     private void init() {
-        setVisible(true);
+        setVisible(false);
         quitButton.addActionListener(e -> frame.setContentPane(new MainMenuPanel(frame)));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setTitle(TetrisSwingStrings.TITLE_GAME_OVER);
