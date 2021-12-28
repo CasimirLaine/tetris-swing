@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="tetris-swing" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+  <configuration default="false" name="tetris-swing [run]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -9,7 +9,9 @@
         <list />
       </option>
       <option name="taskNames">
-        <list />
+        <list>
+          <option value="run" />
+        </list>
       </option>
       <option name="vmOptions" value="" />
     </ExternalSystemSettings>
