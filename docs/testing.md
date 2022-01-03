@@ -1,5 +1,7 @@
 # Test document
 
+The program has been tested with **Java** version 17.
+
 Program has been tested using various methods.
 - Unit tests from [tetris-swing](https://github.com/CasimirLaine/tetris-base/tree/master/src/test/java/com/laine/casimir/tetris/base) testing the application logic.
 - Integration tests have been performed on different operating systems (Windows and Linux)
@@ -20,7 +22,7 @@ The Java Swing user interface of the application has not been tested via unit te
 
 ### Test coverage
 
-Test coverage of the application logic in tetris-base is 53%.
+Test coverage of the application logic in tetris-base is 95%.
 
 ## Integration tests
 
