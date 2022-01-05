@@ -43,13 +43,15 @@ The game will start with a countdown. When the counter reaches zero the game wil
 
 After the countdown the first tetromino piece starts to fall down.
 
-![Countdown](./images/manual/game.png)
+![Gameplay](./images/manual/gameplay.png)
 
 #### Hold box
 
 On the top left there is the hold box.
 
-The falling tetromino can be placed into a hold box. After placing a piece into a hold box the next tetromino will appear.
+The falling tetromino can be placed into the hold box. After placing the piece into a hold box the next tetromino will appear.
+
+The hold box has a capacity of one and if the hold box is occupied, the previous held tetromino will begin to fall.
 
 #### Score
 
@@ -76,8 +78,20 @@ The game will continues to run until the player loses the game.
 
 The game is considered lost when the falling tetromino locks into place outside the visible grid (above the playfield).
 
+#### Pause
+
+Click "Esc" or "F1" to pause the game.
+
+![Game over](./images/manual/pause_menu.png)
+
+To resume the game click "RESUME".
+
+To view the controls click "CONTROLS".
+
+To exit to the main menu click "QUIT".
+
 ### Game over
 
-![Countdown](./images/manual/game_over.png)
+![Game over](./images/manual/game_over.png)
 
 To exit click "QUIT".
