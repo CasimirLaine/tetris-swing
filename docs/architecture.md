@@ -14,13 +14,13 @@ Tetris Swing is composed of two modules: [tetris-swing](https://github.com/Casim
 
 Contains the user interface logic and layouts.
 
-![Tetris Swing](./images/architecture/tetris-swing.png)
+![Tetris Swing](./images/architecture/structure-tetris-swing.png)
 
 #### [tetris-base](https://github.com/CasimirLaine/tetris-base)
 
-tetris-base contains all the application logic of tetris game.
+Contains all the application logic of tetris game.
 
-![Tetris Base](./images/architecture/tetris-base.png)
+![Tetris Base](./images/architecture/structure-tetris-base.png)
 
 ## User interface
 
