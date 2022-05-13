@@ -119,7 +119,7 @@ public final class TetrisGamePanel extends JLayeredPane {
             for (int x = 0; x < tetrisGrid.getColCount(); x++) {
                 final MinoView minoView = new MinoView();
                 minoView.setBackground(transparent);
-                minoView.setForeground(SwingTetrisConstants.COLOR_TETROMINO_BORDER);
+                minoView.setForeground(transparent);
                 tetrisGrid.add(minoView, new Point(x, y));
                 minoViews.add(minoView);
             }
@@ -194,11 +194,12 @@ public final class TetrisGamePanel extends JLayeredPane {
     private void renderGrid() {
         for (int index = 0; index < minoViews.size(); index++) {
             minoViews.get(index).setBackground(transparent);
+            minoViews.get(index).setForeground(transparent);
         }
         final List<TetrisCell> ghostCells = tetrisController.getGhostCells();
         renderCells(ghostCells, true, null);
-        final List<TetrisCell> alLCells = tetrisController.getAlLCells();
-        renderCells(alLCells, false, null);
+        final List<TetrisCell> allCells = tetrisController.getAllCells();
+        renderCells(allCells, false, null);
         tetrisGrid.revalidate();
         tetrisGrid.repaint();
     }
@@ -210,6 +211,7 @@ public final class TetrisGamePanel extends JLayeredPane {
                 final int uiMinoIndex = tetrisGrid.getColCount() * tetrisCell.getY() + tetrisCell.getX();
                 if (uiMinoIndex >= 0 && uiMinoIndex < minoViews.size()) {
                     minoViews.get(uiMinoIndex).setBackground(color == null ? Color.decode(tetrisCell.getColorHex()) : color);
+                    minoViews.get(uiMinoIndex).setForeground(SwingTetrisConstants.COLOR_TETROMINO_BORDER);
                     minoViews.get(uiMinoIndex).setGhostMode(ghost);
                 }
             }
